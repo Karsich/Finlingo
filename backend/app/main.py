@@ -16,7 +16,7 @@ load_dotenv()
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Finlingo API",
+    title="Fingram API",
     description="API для обучения бытовым темам",
     version="1.0.0"
 )
@@ -37,7 +37,7 @@ app.include_router(lives.router, prefix="/api/lives", tags=["lives"])
 
 @app.get("/")
 async def root():
-    return {"message": "Finlingo API работает!"}
+    return {"message": "Fingram API работает!"}
 
 @app.get("/api/health")
 async def health_check():

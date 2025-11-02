@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
 
@@ -11,14 +11,6 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    
-    @validator('password')
-    def validate_password(cls, v):
-        if len(v) < 6:
-            raise ValueError('Пароль должен содержать минимум 6 символов')
-        if len(v) > 72:
-            raise ValueError('Пароль не должен превышать 72 символа')
-        return v
 
 class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
@@ -49,12 +41,6 @@ class TokenData(BaseModel):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
-    
-    @validator('password')
-    def validate_password(cls, v):
-        if len(v) > 72:
-            raise ValueError('Пароль не должен превышать 72 символа')
-        return v
 
 # Схемы для жизней
 class UserLivesResponse(BaseModel):

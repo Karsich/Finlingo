@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { usersAPI, livesAPI } from '../services/api';
-import { Heart, Upload, Save } from 'lucide-react';
+import { Upload, Save, BookOpen, Trophy, Clock } from 'lucide-react';
+import LivesBadge from '../components/LivesBadge';
 import toast from 'react-hot-toast';
 
 const Profile = () => {
@@ -101,20 +102,11 @@ const Profile = () => {
           </p>
         </div>
 
-        {/* Карточка с жизнями */}
+        {/* Компактный бейдж жизней */}
         {lives && (
-          <div className="lives-card">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Heart className="text-white" size={24} />
-              <span className="text-lg">Ваши жизни</span>
-            </div>
-            <div className="lives-count">
-              {lives.current_lives}
-            </div>
-            <div className="lives-label">
-              из {lives.max_lives} максимальных
-            </div>
-            <div className="text-sm mt-2 opacity-75">
+          <div className="mb-6">
+            <LivesBadge current={lives.current_lives} max={lives.max_lives} />
+            <div className="text-sm mt-2 text-gray-600">
               Последний сброс: {new Date(lives.last_reset_date).toLocaleDateString('ru-RU')}
             </div>
           </div>
@@ -142,6 +134,28 @@ const Profile = () => {
               <span className={`info-value ${user?.is_active ? 'text-green-600' : 'text-red-600'}`}>
                 {user?.is_active ? 'Активен' : 'Заблокирован'}
               </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Ваша статистика (горизонтально) */}
+        <div className="card mb-6">
+          <h2 className="section-title">Ваша статистика</h2>
+          <div className="stats-row mt-4">
+            <div className="stat-item">
+              <BookOpen className="mx-auto mb-2 text-blue-600" size={28} />
+              <div className="text-2xl font-bold text-blue-600">0</div>
+              <div className="stat-title">Пройденных уроков</div>
+            </div>
+            <div className="stat-item">
+              <Trophy className="mx-auto mb-2 text-green-600" size={28} />
+              <div className="text-2xl font-bold text-green-600">0</div>
+              <div className="stat-title">Достижений</div>
+            </div>
+            <div className="stat-item">
+              <Clock className="mx-auto mb-2 text-purple-600" size={28} />
+              <div className="text-2xl font-bold text-purple-600">0</div>
+              <div className="stat-title">Минут обучения</div>
             </div>
           </div>
         </div>

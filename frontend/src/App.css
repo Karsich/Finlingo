@@ -9,6 +9,10 @@
   padding: 20px 0;
 }
 
+.main-content:has(.login-page) {
+  padding: 0;
+}
+
 .navbar {
   background: white;
   border-bottom: 1px solid #e5e7eb;
@@ -159,6 +163,23 @@
   opacity: 0.9;
 }
 
+/* Компактный бейдж жизней */
+.lives-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.lives-badge-icon {
+  color: #ef4444;
+}
+
 .profile-section {
   margin-bottom: 32px;
 }
@@ -237,4 +258,24 @@
   .lives-count {
     font-size: 36px;
   }
+}
+
+/* Горизонтальная строка статистики */
+.stats-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 1 1 200px;
+  text-align: center;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.stat-title {
+  color: #6b7280;
 }

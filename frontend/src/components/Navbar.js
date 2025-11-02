@@ -28,13 +28,13 @@ const Navbar = () => {
       <div className="container">
         <div className="navbar-content">
           <Link to="/" className="logo">
-            Finlingo
+            Fingram
           </Link>
           
           {isAuthenticated ? (
             <div className="nav-links">
               <Link to="/dashboard" className="nav-link">
-                Дашборд
+                Главная
               </Link>
               <Link to="/profile" className="nav-link">
                 Профиль

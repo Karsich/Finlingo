@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { livesAPI } from '../services/api';
-import { Heart, BookOpen, Trophy, Clock } from 'lucide-react';
+import LivesBadge from '../components/LivesBadge';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -62,40 +62,12 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* Карточка с жизнями */}
-        <div className="lives-card">
-          <div className="lives-count">
-            {lives?.current_lives || 0}
+        {/* Компактный бейдж жизней */}
+        {lives && (
+          <div className="mb-6">
+            <LivesBadge current={lives.current_lives} max={lives.max_lives} />
           </div>
-          <div className="lives-label">
-            Жизней осталось сегодня
-          </div>
-          <div className="text-sm mt-2 opacity-75">
-            Максимум: {lives?.max_lives || 3} жизней
-          </div>
-        </div>
-
-        {/* Статистика */}
-        <div className="card mb-6">
-          <h2 className="section-title">Ваша статистика</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <BookOpen className="mx-auto mb-2 text-blue-600" size={32} />
-              <div className="text-2xl font-bold text-blue-600">0</div>
-              <div className="text-gray-600">Пройденных уроков</div>
-            </div>
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <Trophy className="mx-auto mb-2 text-green-600" size={32} />
-              <div className="text-2xl font-bold text-green-600">0</div>
-              <div className="text-gray-600">Достижений</div>
-            </div>
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <Clock className="mx-auto mb-2 text-purple-600" size={32} />
-              <div className="text-2xl font-bold text-purple-600">0</div>
-              <div className="text-gray-600">Минут обучения</div>
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* Доступные темы */}
         <div className="card">
