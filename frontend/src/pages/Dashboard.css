@@ -1,0 +1,576 @@
+/* Главный экран Dashboard */
+.dashboard-main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #FFFFFF;
+  overflow-x: hidden;
+}
+
+/* Центральный контентный блок */
+.dashboard-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 2880px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 2880px;
+  background: #FFEBCA;
+}
+
+/* Шапка */
+.dashboard-header {
+  position: relative;
+  width: 100%;
+  height: 900px;
+  background: #f8a720;
+  border-radius: 0px 0px 50px 50px;
+  overflow: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Декоративные полигоны в шапке */
+/* Убрали кастомные полигоны; используем HoneycombDecoration из Login */
+.header-decoration-group { display: none; }
+
+/* Контент шапки */
+.header-content {
+  position: relative;
+  z-index: 2;
+  padding: 246px 260px 0 360px;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header-title {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin-bottom: 28px;
+}
+
+.header-description {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.005em;
+  color: #642714;
+  margin-bottom: 64px;
+  max-width: 580px;
+}
+
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-primary-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  width: 263px;
+  height: 50px;
+  background: #FFFFFF;
+  border-radius: 100px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 145%;
+  letter-spacing: -0.005em;
+  color: #F8A720;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary-dashboard:hover {
+  background: #F8DCB1;
+}
+
+.btn-secondary-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  width: 259px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #FFFFFF;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 145%;
+  letter-spacing: -0.005em;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary-dashboard:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Футер в шапке */
+.header-footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 55px 50px 50px;
+  gap: 120px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  color: #000000;
+}
+
+.header-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-nav-link {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 145%;
+  letter-spacing: -0.005em;
+  text-transform: capitalize;
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.header-nav-link:hover {
+  opacity: 0.7;
+}
+
+.header-social-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-social-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.header-social-icon:hover {
+  opacity: 0.7;
+}
+
+/* Изображение в шапке */
+.header-image-container {
+  position: absolute;
+  width: 948px;
+  height: 760px;
+  right: 0;
+  top: 246px;
+  pointer-events: none;
+}
+
+.header-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Основной контент */
+.dashboard-content {
+  position: relative;
+  padding: 100px 260px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 1800px;
+}
+
+/* Honeycomb как в Login, но прижат справа и без инверсии */
+.dashboard-header .honeycomb-layer {
+  position: absolute;
+  left: 711px;
+  top: 227px;
+  width: 783px;
+  /*height: 657.41px;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dashboard-header .honeycomb-svg {
+  width: 948px;
+  height: 983px;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+
+}
+
+/* Заголовок секции */
+.section-title-main {
+  width: 100%;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #642714;
+  margin-bottom: 200px;
+}
+
+/* Декоративные полигоны на странице */
+.decoration-polygons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.content-polygon {
+  position: absolute;
+  width: 289px;
+  height: 293px;
+  background: #FFE864;
+  border-radius: 30px;
+  transform: rotate(45deg);
+  opacity: 0.8;
+}
+
+/* Карточки курсов */
+.courses-section {
+  position: relative;
+  margin-bottom: 200px;
+}
+
+/* Новая сетка для двух блоков в средней части */
+.lesson-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.lesson-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.lesson-illustration {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.course-card.no-top-gap {
+  margin-top: 0;
+}
+
+.course-card {
+  position: relative;
+  width: 550px;
+  height: 369px;
+  background: #642714;
+  border-radius: 40px;
+  padding: 52px 50px;
+  margin-bottom: 50px;
+}
+
+.course-card.right {
+  margin-left: auto;
+  width: 546px;
+}
+
+.course-card-icon {
+  position: absolute;
+  width: 57.17px;
+  height: 57.17px;
+  right: 60px;
+  top: 12px;
+  transform: rotate(45deg);
+}
+
+.course-card-icon::before {
+  content: '';
+  position: absolute;
+  left: 11.77%;
+  right: 4.89%;
+  top: 11.8%;
+  bottom: 4.87%;
+  border: 4px solid #C97200;
+  transform: rotate(-45deg);
+}
+
+.course-card-title {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 25px;
+}
+
+.course-card-description {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.005em;
+  color: #F8DCB1;
+}
+
+/* Прогресс-бары */
+.progress-group {
+  position: relative;
+  margin-top: 115px;
+}
+
+.progress-track {
+  position: relative;
+  width: 120%;
+  height: 50px;
+  background: #FFFFFF;
+  border-radius: 50px;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #C97200;
+  border-radius: 50px;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.005em;
+  color: #C97200;
+}
+
+/* Футер внизу */
+.dashboard-footer {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 120px;
+  background: #F8A720;
+  border-radius: 50px 50px 0px 0px;
+  margin-top: auto;
+}
+
+.dashboard-footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 55px 50px 50px;
+  gap: 120px;
+  height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.footer-logo {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  color: #000000;
+}
+
+/* Декоративные изображения */
+.decorative-image-top {
+  position: absolute;
+  width: 680px;
+  height: 762px;
+  left: 373px;
+  top: -162px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Сняли старые абсолютные декоративные изображения */
+.decorative-image-middle, .decorative-image-bottom { display: none; }
+
+.decorative-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Адаптивность */
+@media (max-width: 1920px) {
+  .dashboard-container {
+    max-width: 100%;
+  }
+  
+  .dashboard-content {
+    padding: 100px 5%;
+  }
+  
+  .header-content {
+    padding: 246px 5% 0 5%;
+  }
+  
+  .course-card {
+    width: 100%;
+    max-width: 550px;
+  }
+  
+  .course-card.right {
+    width: 100%;
+    max-width: 546px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-title {
+    font-size: 64px;
+  }
+  
+  .header-decoration-group,
+  .header-image-container {
+    display: none;
+  }
+  
+  .course-card-title {
+    font-size: 48px;
+  }
+  
+  .section-title-main {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    height: auto;
+    min-height: 600px;
+    padding-bottom: 120px;
+  }
+  
+  .header-content {
+    padding: 120px 20px 0 20px;
+  }
+  
+  .header-title {
+    font-size: 48px;
+  }
+  
+  .header-description {
+    font-size: 16px;
+  }
+  
+  .header-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-primary-dashboard,
+  .btn-secondary-dashboard {
+    width: 100%;
+  }
+  
+  .dashboard-content {
+    padding: 50px 20px;
+  }
+  
+  .course-card {
+    height: auto;
+    padding: 40px 30px;
+  }
+  
+  .course-card-title {
+    font-size: 36px;
+  }
+  
+  .section-title-main {
+    font-size: 28px;
+    margin-bottom: 100px;
+  }
+  
+  .header-footer,
+  .dashboard-footer-content {
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 20px;
+    height: auto;
+  }
+}
+

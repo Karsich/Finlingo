@@ -13,12 +13,13 @@ import './App.css';
 function AppContent() {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
-  const showNavbar = isAuthenticated || !['/login', '/register'].includes(location.pathname);
+  const showNavbar = isAuthenticated && !['/login', '/register', '/dashboard'].includes(location.pathname);
+  const isDashboard = location.pathname === '/dashboard';
 
   return (
     <div className="App">
       {showNavbar && <Navbar />}
-      <main className="main-content">
+      <main className={`main-content ${isDashboard ? 'dashboard-page' : ''}`}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
