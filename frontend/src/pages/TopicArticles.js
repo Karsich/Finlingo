@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Settings, User } from 'lucide-react';
 import './TopicArticles.css';
 import { progressAPI } from '../services/api';
 
 const TopicArticles = () => {
   const { topic } = useParams();
+  const navigate = useNavigate();
   const [hoveredLesson, setHoveredLesson] = useState(null);
 
   // Определяем заголовок темы
@@ -24,9 +25,23 @@ const TopicArticles = () => {
         const res = await progressAPI.getByTopic(topicSlug);
         const map = {};
         for (const i of (res.data?.items || [])) { map[i.lesson_number] = i.status; }
+        
+        // Если первый урок не найден в БД, делаем его активным
+        if (!map[1]) {
+          try {
+            await progressAPI.markActive(topicSlug, 1);
+            map[1] = 'active';
+          } catch (error) {
+            console.warn('Не удалось инициализировать первый урок:', error);
+          }
+        }
+        
         setLessonStatusByNumber(map);
-      } catch (e) {
-        // оставляем пустым
+      } catch (error) {
+        // Ошибка загрузки прогресса - оставляем пустым
+        console.warn('Не удалось загрузить прогресс уроков:', error);
+        // Все равно делаем первый урок активным
+        setLessonStatusByNumber({ 1: 'active' });
       }
     };
     load();
@@ -36,9 +51,15 @@ const TopicArticles = () => {
   const palette = ['#F8A720', '#C97200', '#642714'];
   const getLessonColor = (lessonNumber) => palette[(lessonNumber - 1) % 3];
 
-  // Получаем название урока (заглушка)
+  // Получаем название урока
   const getLessonTitle = (lessonNumber) => {
-    return `Название урока ${lessonNumber}`;
+    if (topic === 'rent' && lessonNumber === 1) {
+      return 'Поиск жилища';
+    }
+    if (topic === 'rent' && lessonNumber === 2) {
+      return 'Вопрос – копейку бережет';
+    }
+    return `Урок ${lessonNumber}`;
   };
 
   // Позиции для шестиугольников в honeycomb pattern согласно дизайну
@@ -60,9 +81,26 @@ const TopicArticles = () => {
   };
 
   const handleLessonClick = (lessonNumber) => {
-    // Здесь будет переход к конкретному уроку
-    console.log(`Переход к уроку ${lessonNumber} темы ${topicTitle}`);
-    // navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
+    // Первый урок всегда доступен
+    if (lessonNumber === 1) {
+      navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
+      return;
+    }
+    
+    // Для остальных уроков проверяем статус
+    const status = lessonStatusByNumber[lessonNumber];
+    // Если статуса нет или он 'locked', урок заблокирован
+    if (!status || status === 'locked') {
+      return;
+    }
+    
+    // Проверяем, что предыдущий урок пройден
+    const previousStatus = lessonStatusByNumber[lessonNumber - 1];
+    if (previousStatus !== 'completed' && lessonNumber > 1) {
+      return;
+    }
+    
+    navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
   };
 
   return (
@@ -174,7 +212,9 @@ const TopicArticles = () => {
               {lessons.map((lessonNumber) => {
                 const position = getLessonPosition(lessonNumber);
                 const color = getLessonColor(lessonNumber);
-                const status = lessonStatusByNumber[lessonNumber] || 'locked';
+                // Первый урок всегда активен по умолчанию
+                const defaultStatus = lessonNumber === 1 ? 'active' : 'locked';
+                const status = lessonStatusByNumber[lessonNumber] || defaultStatus;
                 const isInactive = !(status === 'active' || status === 'completed');
                 const isHovered = hoveredLesson === lessonNumber;
 

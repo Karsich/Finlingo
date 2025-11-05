@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import TopicArticles from './pages/TopicArticles';
+import Lesson from './pages/Lesson';
 import './App.css';
 
 function AppContent() {
@@ -45,6 +46,14 @@ function AppContent() {
                 element={
                   <ProtectedRoute>
                     <TopicArticles />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/topic/:topic/lesson/:lessonNumber" 
+                element={
+                  <ProtectedRoute>
+                    <Lesson />
                   </ProtectedRoute>
                 } 
               />

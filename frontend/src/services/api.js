@@ -67,6 +67,10 @@ export const topicsAPI = {
 
 export const progressAPI = {
   getByTopic: (slug) => api.get(`/api/progress/${slug}`),
+  markCompleted: (topicSlug, lessonNumber) => 
+    api.post(`/api/progress/${topicSlug}/lesson/${lessonNumber}`, { status: 'completed' }),
+  markActive: (topicSlug, lessonNumber) => 
+    api.post(`/api/progress/${topicSlug}/lesson/${lessonNumber}`, { status: 'active' }),
 };
 
 export default api;

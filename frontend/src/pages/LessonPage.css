@@ -1,0 +1,202 @@
+/* Стили для страницы урока */
+
+.lesson-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.lesson-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Шапка */
+.lesson-page-header {
+  background: #C97200;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.lesson-page-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lesson-page-header .header-logo {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.lesson-page-header .header-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.lesson-page-header .header-nav-link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  transition: opacity 0.2s;
+}
+
+.lesson-page-header .header-nav-link:hover {
+  opacity: 0.7;
+}
+
+.lesson-page-header .header-social-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.lesson-page-header .header-social-icon {
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+}
+
+.lesson-page-header .header-social-icon:hover {
+  opacity: 0.7;
+}
+
+/* Кнопка назад */
+.lesson-page-back {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+  width: 100%;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+}
+
+.back-button:active {
+  background-color: #e0e0e0;
+}
+
+/* Футер */
+.lesson-page-footer {
+  background: #C97200;
+  padding: 20px 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+.lesson-page-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.lesson-page-footer .footer-logo {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* Кнопки навигации в конце урока */
+.lesson-navigation {
+  display: flex;
+  gap: 20px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 2px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.lesson-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 200px;
+  justify-content: center;
+}
+
+.lesson-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lesson-button-primary {
+  background: #C97200;
+  color: #ffffff;
+}
+
+.lesson-button-primary:hover:not(:disabled) {
+  background: #B86500;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(201, 114, 0, 0.3);
+}
+
+.lesson-button-secondary {
+  background: #f5f5f5;
+  color: #000000;
+  border: 2px solid #C97200;
+}
+
+.lesson-button-secondary:hover:not(:disabled) {
+  background: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .lesson-page-header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .lesson-page-header .header-nav {
+    gap: 15px;
+  }
+
+  .lesson-page-back {
+    padding: 15px 15px 0;
+  }
+
+  .lesson-navigation {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .lesson-button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+

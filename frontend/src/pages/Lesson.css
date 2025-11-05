@@ -1,0 +1,297 @@
+/* Стили для страниц лекций и уроков */
+
+/* Основной контейнер для контента урока */
+.lesson-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Заголовок h1 - главный заголовок страницы */
+.lesson-content h1 {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 110%;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.03em;
+  color: #000000;
+  margin: 0 0 40px 0;
+}
+
+/* Заголовок h2 - заголовок секции */
+.lesson-content h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 36px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  vertical-align: middle;
+  color: #C97200;
+  margin: 40px 0 20px 0;
+}
+
+/* Заголовок h3 - подзаголовок */
+.lesson-content h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  vertical-align: middle;
+  color: #C97200;
+  margin: 30px 0 15px 0;
+}
+
+/* Стандартный текст */
+.lesson-content p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  vertical-align: middle;
+  color: #000000;
+  margin: 0 0 20px 0;
+}
+
+/* Ссылки */
+.lesson-content a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  vertical-align: middle;
+  color: #0000FF;
+  text-decoration: none;
+}
+
+.lesson-content a:hover {
+  text-decoration: underline;
+}
+
+/* Маркированные списки */
+.lesson-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.lesson-content ul li {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #000000;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.lesson-content ul li::before {
+  content: '•';
+  color: #C97200;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+}
+
+/* Нумерованные списки - первый уровень */
+.lesson-content ol {
+  list-style: none;
+  counter-reset: item;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.lesson-content ol > li {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #000000;
+  padding-left: 40px;
+  position: relative;
+  margin-bottom: 10px;
+  counter-increment: item;
+}
+
+.lesson-content ol > li::before {
+  content: counter(item) '.';
+  color: #C97200;
+  font-weight: 600;
+  position: absolute;
+  left: 0;
+}
+
+/* Вложенные нумерованные списки - второй уровень (латинские буквы) */
+.lesson-content ol ol {
+  counter-reset: subitem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.lesson-content ol ol > li {
+  counter-increment: subitem;
+  padding-left: 50px;
+}
+
+.lesson-content ol ol > li::before {
+  content: counter(subitem, lower-alpha) '.';
+  color: #C97200;
+  font-weight: 600;
+  position: absolute;
+  left: 20px;
+}
+
+/* Таблицы */
+.lesson-content table {
+  box-sizing: border-box;
+  border: 3px solid #C97200;
+  border-radius: 30px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 30px 0;
+  overflow: hidden;
+}
+
+/* Заголовки таблиц */
+.lesson-content table th {
+  background: #FFEBCA;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #C97200;
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 3px solid #C97200;
+  vertical-align: middle;
+}
+
+/* Скругление для первой строки заголовков */
+.lesson-content table thead tr:first-child th:first-child {
+  border-radius: 30px 0px 0px 0px;
+}
+
+.lesson-content table thead tr:first-child th:last-child {
+  border-radius: 0px 30px 0px 0px;
+}
+
+/* Ячейки таблиц */
+.lesson-content table td {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #000000;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(201, 114, 0, 0.2);
+  vertical-align: middle;
+}
+
+.lesson-content table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Списки внутри таблиц */
+.lesson-content table ul,
+.lesson-content table ol {
+  margin: 5px 0;
+}
+
+/* Дополнительные элементы */
+.lesson-content strong {
+  font-weight: 600;
+}
+
+.lesson-content em {
+  font-style: italic;
+}
+
+/* Контейнер для интерактивных элементов */
+.lesson-content .interactive-element {
+  margin: 30px 0;
+}
+
+/* Стили для полей ввода в интерактивных заданиях */
+.lesson-content input[type="text"],
+.lesson-content input[type="email"],
+.lesson-content select,
+.lesson-content textarea {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #000000;
+  padding: 10px 15px;
+  border: 2px solid #C97200;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.lesson-content input[type="text"]:focus,
+.lesson-content input[type="email"]:focus,
+.lesson-content select:focus,
+.lesson-content textarea:focus {
+  outline: none;
+  border-color: #F8A720;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .lesson-content h1 {
+    font-size: 48px;
+    line-height: 110%;
+  }
+
+  .lesson-content h2 {
+    font-size: 28px;
+  }
+
+  .lesson-content h3 {
+    font-size: 18px;
+  }
+
+  .lesson-content p,
+  .lesson-content a,
+  .lesson-content ul li,
+  .lesson-content ol li,
+  .lesson-content table th,
+  .lesson-content table td {
+    font-size: 16px;
+  }
+
+  .lesson-content {
+    padding: 20px 15px;
+  }
+
+  .lesson-content table {
+    font-size: 14px;
+  }
+
+  .lesson-content table th,
+  .lesson-content table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
