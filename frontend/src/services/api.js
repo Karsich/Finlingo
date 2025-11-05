@@ -61,4 +61,12 @@ export const livesAPI = {
   useLife: () => api.post('/api/lives/use-life'),
 };
 
+export const topicsAPI = {
+  list: () => api.get('/api/topics/'),
+};
+
+export const progressAPI = {
+  getByTopic: (slug) => api.get(`/api/progress/${slug}`),
+};
+
 export default api;

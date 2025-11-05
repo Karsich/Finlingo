@@ -8,12 +8,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
+import TopicArticles from './pages/TopicArticles';
 import './App.css';
 
 function AppContent() {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
-  const showNavbar = isAuthenticated && !['/login', '/register', '/dashboard'].includes(location.pathname);
+  const showNavbar = isAuthenticated && !['/login', '/register', '/dashboard'].includes(location.pathname) && !location.pathname.startsWith('/topic/');
   const isDashboard = location.pathname === '/dashboard';
 
   return (
@@ -36,6 +37,14 @@ function AppContent() {
                 element={
                   <ProtectedRoute>
                     <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/topic/:topic" 
+                element={
+                  <ProtectedRoute>
+                    <TopicArticles />
                   </ProtectedRoute>
                 } 
               />

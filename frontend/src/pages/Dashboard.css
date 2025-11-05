@@ -48,7 +48,7 @@
 .header-content {
   position: relative;
   z-index: 2;
-  padding: 246px 260px 0 360px;
+  padding: 300px 350px 0 87px;
   max-width: 1400px;
   margin: 0 auto;
   height: 100%;
@@ -475,102 +475,5 @@
   object-fit: contain;
 }
 
-/* Адаптивность */
-@media (max-width: 1920px) {
-  .dashboard-container {
-    max-width: 100%;
-  }
-  
-  .dashboard-content {
-    padding: 100px 5%;
-  }
-  
-  .header-content {
-    padding: 246px 5% 0 5%;
-  }
-  
-  .course-card {
-    width: 100%;
-    max-width: 550px;
-  }
-  
-  .course-card.right {
-    width: 100%;
-    max-width: 546px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .header-title {
-    font-size: 64px;
-  }
-  
-  .header-decoration-group,
-  .header-image-container {
-    display: none;
-  }
-  
-  .course-card-title {
-    font-size: 48px;
-  }
-  
-  .section-title-main {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-header {
-    height: auto;
-    min-height: 600px;
-    padding-bottom: 120px;
-  }
-  
-  .header-content {
-    padding: 120px 20px 0 20px;
-  }
-  
-  .header-title {
-    font-size: 48px;
-  }
-  
-  .header-description {
-    font-size: 16px;
-  }
-  
-  .header-buttons {
-    flex-direction: column;
-  }
-  
-  .btn-primary-dashboard,
-  .btn-secondary-dashboard {
-    width: 100%;
-  }
-  
-  .dashboard-content {
-    padding: 50px 20px;
-  }
-  
-  .course-card {
-    height: auto;
-    padding: 40px 30px;
-  }
-  
-  .course-card-title {
-    font-size: 36px;
-  }
-  
-  .section-title-main {
-    font-size: 28px;
-    margin-bottom: 100px;
-  }
-  
-  .header-footer,
-  .dashboard-footer-content {
-    flex-direction: column;
-    gap: 20px;
-    padding: 30px 20px;
-    height: auto;
-  }
-}
+/* ПК-версия только: убраны медиазапросы */
 

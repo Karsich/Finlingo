@@ -1,0 +1,295 @@
+/* Страница со списком статей темы */
+.topic-articles-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #FFFFFF;
+  overflow-x: hidden;
+}
+
+.topic-articles-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 2400px;
+  background: #FFFFFF;
+}
+
+/* Заголовок */
+.topic-articles-header {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 122px;
+  background: #F8A720;
+}
+
+.topic-articles-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 55px 50px 50px;
+  gap: 120px;
+  height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Основной контент */
+.topic-articles-content {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 2400px;
+  background: #FFEBCA;
+  padding-top: 0;
+}
+
+.topic-articles-background {
+  position: relative;
+  width: 100%;
+  min-height: 2400px;
+  background: #FFEBCA;
+  overflow: hidden;
+}
+
+/* Декоративные пентагоны */
+.decorative-pentagons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decorative-svg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1920px;
+  height: 2400px;
+  max-width: none;
+}
+
+/* Заголовок темы */
+.topic-title {
+  position: absolute;
+  width: 517px;
+  height: 145px;
+  left: 354px;
+  top: 199px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 116px;
+  color: #000000;
+  margin: 0;
+  z-index: 2;
+}
+
+/* Сетка уроков */
+.lessons-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 2400px;
+  z-index: 2;
+}
+
+/* Пентагон урока */
+.lesson-pentagon-wrapper {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.lesson-pentagon {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s, filter 0.2s;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+}
+
+.lesson-pentagon-wrapper:hover .lesson-pentagon {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+.lesson-number {
+  position: absolute;
+  width: 216px;
+  height: 108px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FFFFFF;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Подсказка с названием урока */
+.lesson-tooltip {
+  position: absolute;
+  width: 400px;
+  height: 150px;
+  left: 50%;
+  top: -180px;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.lesson-tooltip-content {
+  position: absolute;
+  width: 400px;
+  height: 122px;
+  left: 0;
+  top: 0;
+  background: #FFFFFF;
+  border: 5px solid #642714;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #642714;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lesson-tooltip-arrow {
+  position: absolute;
+  width: 67.89px;
+  height: 56.06px;
+  left: 50%;
+  top: 122px;
+  transform: translateX(-50%) rotate(180deg);
+  background: #642714;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+}
+
+/* Футер */
+.topic-articles-footer {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 120px;
+  background: #F8A720;
+  border-radius: 0px 0px 50px 50px;
+  margin-top: auto;
+}
+
+.topic-articles-footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 55px 50px 50px;
+  gap: 120px;
+  height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.footer-logo {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  color: #000000;
+}
+
+/* Общие стили для навигации (используются из Dashboard) */
+.header-logo {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  color: #000000;
+}
+
+.header-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-nav-link {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 145%;
+  letter-spacing: -0.005em;
+  text-transform: capitalize;
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.header-nav-link:hover {
+  opacity: 0.7;
+}
+
+.header-social-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-social-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.header-social-icon:hover {
+  opacity: 0.7;
+}
+
+/* ПК-версия только: без адаптивности */
+

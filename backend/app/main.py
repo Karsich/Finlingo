@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 from app.database import get_db
 from app.routers import auth, users, lives
+from app.routers import topics as topics_router
+from app.routers import progress as progress_router
 from app.models import Base
 from app.database import engine
 
@@ -34,6 +36,8 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(users.router, prefix="/api/users", tags=["users"])
 app.include_router(lives.router, prefix="/api/lives", tags=["lives"])
+app.include_router(topics_router.router, prefix="/api/topics", tags=["topics"])
+app.include_router(progress_router.router, prefix="/api/progress", tags=["progress"])
 
 @app.get("/")
 async def root():

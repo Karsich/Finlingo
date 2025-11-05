@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { livesAPI } from '../services/api';
+import { livesAPI, topicsAPI, progressAPI } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { Settings, User } from 'lucide-react';
 import HoneycombDecoration from '../components/HoneycombDecoration';
@@ -14,22 +14,47 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [lives, setLives] = useState(null);
   const [loading, setLoading] = useState(true);
+  // Прогресс тем из API - хуки должны быть объявлены до любого условного возврата
+  const [jobProgress, setJobProgress] = useState({ current: 0, total: 11, percent: 0 });
+  const [rentProgress, setRentProgress] = useState({ current: 0, total: 11, percent: 0 });
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchLives();
-  }, []);
 
   const fetchLives = async () => {
     try {
       const response = await livesAPI.getMyLives();
       setLives(response.data);
     } catch (error) {
-      console.error('Ошибка загрузки жизней');
+      console.error('Ошибка загрузки жизней:', error);
     } finally {
       setLoading(false);
     }
   };
+
+  const fetchTopicsProgress = async () => {
+    try {
+      const [jobRes, rentRes] = await Promise.all([
+        progressAPI.getByTopic('job'),
+        progressAPI.getByTopic('rent'),
+      ]);
+
+      const calc = (items) => {
+        const total = 11;
+        const current = items?.data?.items?.filter(i => i.status === 'completed').length || 0;
+        const percent = (current / total) * 100;
+        return { current, total, percent };
+      };
+      setJobProgress(calc(jobRes));
+      setRentProgress(calc(rentRes));
+    } catch (e) {
+      console.warn('Не удалось загрузить прогресс тем');
+    }
+  };
+
+  useEffect(() => {
+    fetchLives();
+    // Подгружаем прогресс тем для прогресс-баров
+    fetchTopicsProgress();
+  }, []);
 
   const handleStartCourse = () => {
     if (lives?.current_lives <= 0) {
@@ -51,17 +76,6 @@ const Dashboard = () => {
       </div>
     );
   }
-
-  // Прогресс (замените, когда появится API): читаем из user?.progress, иначе 0/10
-  const getProgress = (key) => {
-    const total = user?.progress?.[key]?.total ?? 10;
-    const current = Math.max(0, Math.min(total, user?.progress?.[key]?.current ?? 0));
-    const percent = total > 0 ? (current / total) * 100 : 0;
-    return { current, total, percent };
-  };
-
-  const jobProgress = getProgress('job');
-  const rentProgress = getProgress('rent');
 
   return (
     <div className="dashboard-main">
@@ -104,8 +118,9 @@ const Dashboard = () => {
           <div className="header-content">
             <h1 className="header-title">Как быть взрослым?</h1>
             <p className="header-description">
-              Где и как снимать жильё? Что такое резюме и как пройти собеседование? 
-              На наших уроках ты узнаешь как пройти квест под названием взрослая жизнь и не сойти с ума
+              <p>Где и как снимать жильё?</p> 
+              <p>Что такое резюме и как пройти собеседование?</p>
+              <p>На наших уроках ты узнаешь как пройти квест под названием взрослая жизнь и не сойти с ума</p>
             </p>
             <div className="header-buttons">
               <button 
@@ -151,7 +166,19 @@ const Dashboard = () => {
             <div className="lesson-illustration">
               <img src={mascotV10Image} alt="Пчёлка - квартира" className="lesson-image" />
             </div>
-            <div className="course-card right no-top-gap">
+            <div 
+              className="course-card right no-top-gap" 
+              onClick={() => navigate('/topic/rent')} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate('/topic/rent');
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="course-card-icon"></div>
               <h3 className="course-card-title">Как снять квартиру?</h3>
               <p className="course-card-description">
@@ -175,7 +202,19 @@ const Dashboard = () => {
             <div className="lesson-illustration">
               <img src={mascotV16Image} alt="Пчёлка - работа" className="lesson-image" />
             </div>
-            <div className="course-card">
+            <div 
+              className="course-card" 
+              onClick={() => navigate('/topic/job')} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate('/topic/job');
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="course-card-icon"></div>
               <h3 className="course-card-title">Как найти работу?</h3>
               <p className="course-card-description">

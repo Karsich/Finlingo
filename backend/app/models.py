@@ -34,3 +34,28 @@ class UserLives(Base):
 
     # Связь с пользователем
     user = relationship("User", back_populates="lives")
+
+# Темы и прогресс уроков
+
+class Topic(Base):
+    __tablename__ = "topics"
+
+    id = Column(Integer, primary_key=True, index=True)
+    slug = Column(String, unique=True, index=True, nullable=False)
+    title = Column(String, nullable=False)
+    description = Column(Text, nullable=True)
+    display_order = Column(Integer, default=0, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+
+class LessonProgress(Base):
+    __tablename__ = "lesson_progress"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    topic_slug = Column(String, ForeignKey("topics.slug"), nullable=False)
+    lesson_number = Column(Integer, nullable=False)
+    status = Column(String, default="locked", nullable=False)  # locked | active | completed
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())

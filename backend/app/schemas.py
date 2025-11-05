@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 # Схемы для пользователя
 class UserBase(BaseModel):
@@ -58,3 +58,27 @@ class UserLivesResponse(BaseModel):
 class LivesUpdate(BaseModel):
     current_lives: Optional[int] = None
     max_lives: Optional[int] = None
+
+# Схемы для тем и прогресса
+
+class TopicBase(BaseModel):
+    slug: str
+    title: str
+    description: Optional[str] = None
+    display_order: int = 0
+
+class TopicResponse(TopicBase):
+    id: int
+    created_at: datetime
+    updated_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+class LessonProgressItem(BaseModel):
+    lesson_number: int
+    status: str  # locked | active | completed
+
+class LessonProgressResponse(BaseModel):
+    topic_slug: str
+    items: List[LessonProgressItem]
