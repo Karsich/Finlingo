@@ -14,3 +14,5 @@ def list_topics(db: Session = Depends(get_db)):
     return db.query(Topic).order_by(Topic.display_order.asc(), Topic.id.asc()).all()
 
 
+
+

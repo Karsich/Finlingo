@@ -45,10 +45,23 @@ def update_lesson_progress(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    # Убедимся, что тема существует
+    # Убедимся, что тема существует, если нет - создаём её
     topic = db.query(Topic).filter(Topic.slug == topic_slug).first()
     if not topic:
-        raise HTTPException(status_code=404, detail="Topic not found")
+        # Автоматически создаём тему, если её нет
+        topic_titles = {
+            "rent": "Съем квартиры",
+            "job": "Работа"
+        }
+        topic = Topic(
+            slug=topic_slug,
+            title=topic_titles.get(topic_slug, topic_slug.capitalize()),
+            description=None,
+            display_order=0
+        )
+        db.add(topic)
+        db.commit()
+        db.refresh(topic)
 
     if request.status not in ["active", "completed"]:
         raise HTTPException(status_code=400, detail="Invalid status. Must be 'active' or 'completed'")
@@ -93,6 +106,7 @@ def update_lesson_progress(
         )
 
         if not next_lesson:
+            # Создаём следующий урок как активный
             next_progress = LessonProgress(
                 user_id=current_user.id,
                 topic_slug=topic_slug,
@@ -101,7 +115,18 @@ def update_lesson_progress(
             )
             db.add(next_progress)
             db.commit()
+            db.refresh(next_progress)
+        elif next_lesson.status == "locked":
+            # Если следующий урок был заблокирован, активируем его
+            next_lesson.status = "active"
+            db.commit()
+            db.refresh(next_lesson)
 
-    return {"message": "Progress updated", "lesson_number": lesson_number, "status": request.status}
+    return {
+        "message": "Progress updated",
+        "lesson_number": lesson_number,
+        "status": request.status,
+        "next_lesson_activated": request.status == "completed"
+    }
 
 

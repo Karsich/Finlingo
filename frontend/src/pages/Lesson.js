@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Settings, User, ArrowLeft, ArrowRight } from 'lucide-react';
+import toast from 'react-hot-toast';
 import './Lesson.css';
 import './LessonPage.css';
 import { progressAPI } from '../services/api';
@@ -21,13 +22,19 @@ const Lesson = () => {
   // Проверка доступности урока
   useEffect(() => {
     const checkLessonAccess = async () => {
+      setIsCheckingAccess(true);
       try {
+        // Небольшая задержка для синхронизации с backend
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
         const res = await progressAPI.getByTopic(topic);
         const items = res.data?.items || [];
         const statusMap = {};
         for (const item of items) {
           statusMap[item.lesson_number] = item.status;
         }
+
+        console.log('Проверка доступа к уроку:', lessonNum, 'Статусы:', statusMap);
 
         // Первый урок всегда доступен
         if (lessonNum === 1) {
@@ -38,28 +45,75 @@ const Lesson = () => {
 
         // Проверяем статус текущего урока
         const currentStatus = statusMap[lessonNum];
+        
+        // Проверяем статус предыдущего урока
+        const previousStatus = statusMap[lessonNum - 1];
+        
+        // Если текущий урок активен или пройден - разрешаем доступ
+        if (currentStatus === 'active' || currentStatus === 'completed') {
+          setLessonStatus(currentStatus);
+          setIsCheckingAccess(false);
+          return;
+        }
+        
+        // Если предыдущий урок пройден, но текущий еще не активен - активируем его
+        if (previousStatus === 'completed' && (!currentStatus || currentStatus === 'locked')) {
+          try {
+            console.log('Активация урока', lessonNum, 'так как предыдущий пройден');
+            await progressAPI.markActive(topic, lessonNum);
+            setLessonStatus('active');
+            setIsCheckingAccess(false);
+            return;
+          } catch (error) {
+            console.error('Ошибка активации урока:', error);
+            // Разрешаем доступ даже если активация не удалась
+            setLessonStatus('active');
+            setIsCheckingAccess(false);
+            return;
+          }
+        }
+        
+        // Если предыдущий урок пройден - разрешаем доступ независимо от статуса текущего
+        if (previousStatus === 'completed') {
+          setLessonStatus('active');
+          setIsCheckingAccess(false);
+          return;
+        }
+        
+        // Если статуса нет или он 'locked', и предыдущий не пройден - блокируем
         if (!currentStatus || currentStatus === 'locked') {
+          console.log('Урок заблокирован:', lessonNum, 'Предыдущий статус:', previousStatus);
           // Урок заблокирован - перенаправляем на список уроков
           navigate(`/topic/${topic}`);
           setIsCheckingAccess(false);
           return;
         }
 
-        // Проверяем, что предыдущий урок пройден
-        const previousStatus = statusMap[lessonNum - 1];
-        if (previousStatus !== 'completed' && lessonNum > 1) {
-          // Предыдущий урок не пройден - перенаправляем на список уроков
-          navigate(`/topic/${topic}`);
-          setIsCheckingAccess(false);
-          return;
-        }
-
-        setLessonStatus(currentStatus);
+        // В остальных случаях разрешаем доступ
+        setLessonStatus(currentStatus || 'active');
         setIsCheckingAccess(false);
       } catch (error) {
         console.error('Ошибка проверки доступа к уроку:', error);
-        // Если ошибка и это не первый урок, перенаправляем
+        // Если ошибка и это не первый урок, проверяем предыдущий
         if (lessonNum !== 1) {
+          // Даем еще один шанс - проверяем без блокировки
+          try {
+            const res = await progressAPI.getByTopic(topic);
+            const items = res.data?.items || [];
+            const statusMap = {};
+            for (const item of items) {
+              statusMap[item.lesson_number] = item.status;
+            }
+            const previousStatus = statusMap[lessonNum - 1];
+            if (previousStatus === 'completed') {
+              // Предыдущий пройден - разрешаем доступ
+              setLessonStatus('active');
+              setIsCheckingAccess(false);
+              return;
+            }
+          } catch (e) {
+            console.error('Повторная ошибка:', e);
+          }
           navigate(`/topic/${topic}`);
         } else {
           setLessonStatus('active');
@@ -71,12 +125,49 @@ const Lesson = () => {
     checkLessonAccess();
   }, [topic, lessonNum, navigate]);
 
+  // Проверяем, есть ли следующий урок (проверяем реальное существование контента)
+  const hasNextLesson = () => {
+    if (topic === 'rent') {
+      // Проверяем существующие уроки для rent
+      const existingLessons = [1, 2, 3]; // Список существующих уроков
+      return existingLessons.includes(lessonNum + 1);
+    }
+    return false;
+  };
+
+  // Проверяем, есть ли задания для урока
+  const hasTasks = () => {
+    if (topic === 'rent') {
+      // Только третий урок имеет задания
+      return lessonNum === 3;
+    }
+    return false;
+  };
+
   // Обработка завершения урока
   const handleCompleteLesson = async (nextAction = 'next') => {
     setIsCompleting(true);
     try {
-      // Отмечаем урок как пройденный
-      await progressAPI.markCompleted(topic, lessonNum);
+      console.log('Завершение урока:', lessonNum);
+      
+      // Проверяем, существует ли следующий урок перед переходом
+      const nextLessonExists = hasNextLesson();
+      
+      // Если пользователь нажимает "Следующий урок", но следующего урока не существует
+      // - не отмечаем текущий урок как пройденный
+      if (nextAction === 'next' && !nextLessonExists) {
+        toast.success('Поздравляем! Вы завершили последний доступный урок по этой теме.');
+        navigate(`/topic/${topic}`);
+        setIsCompleting(false);
+        return;
+      }
+      
+      // Отмечаем урок как пройденный (backend автоматически активирует следующий урок, если он существует)
+      const response = await progressAPI.markCompleted(topic, lessonNum);
+      console.log('Ответ от сервера:', response.data);
+      
+      // Небольшая задержка для синхронизации с backend
+      await new Promise(resolve => setTimeout(resolve, 300));
       
       if (nextAction === 'next') {
         // Переход на следующий урок с прокруткой вверх
@@ -84,17 +175,15 @@ const Lesson = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         // Переход к списку уроков
+        toast.success('Прогресс сохранен!');
         navigate(`/topic/${topic}`);
       }
     } catch (error) {
       console.error('Ошибка сохранения прогресса:', error);
-      // Все равно переходим, даже если сохранение не удалось
-      if (nextAction === 'next') {
-        navigate(`/topic/${topic}/lesson/${lessonNum + 1}`);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate(`/topic/${topic}`);
-      }
+      // Показываем ошибку пользователю
+      toast.error('Ошибка при сохранении прогресса. Попробуйте еще раз.');
+      // Перенаправляем на список уроков
+      navigate(`/topic/${topic}`);
     } finally {
       setIsCompleting(false);
     }
@@ -108,16 +197,10 @@ const Lesson = () => {
     if (topic === 'rent' && lessonNum === 2) {
       return getRentLesson2Content();
     }
-    return <div>Урок находится в разработке</div>;
-  };
-
-  // Проверяем, есть ли следующий урок
-  const hasNextLesson = () => {
-    // Для темы rent есть как минимум 2 урока
-    if (topic === 'rent' && lessonNum < 11) {
-      return true;
+    if (topic === 'rent' && lessonNum === 3) {
+      return getRentLesson3Content();
     }
-    return false;
+    return <div>Урок находится в разработке</div>;
   };
 
   return (
@@ -165,11 +248,20 @@ const Lesson = () => {
               
               {/* Кнопки навигации */}
               <div className="lesson-navigation">
+            {hasTasks() && (
+              <button
+                onClick={() => navigate(`/topic/${topic}/lesson/${lessonNum}/task/1`)}
+                className="lesson-button lesson-button-primary"
+              >
+                <span>К заданиям</span>
+                <ArrowRight size={20} />
+              </button>
+            )}
             {hasNextLesson() && (
               <button
                 onClick={() => handleCompleteLesson('next')}
                 disabled={isCompleting}
-                className="lesson-button lesson-button-primary"
+                className="lesson-button lesson-button-secondary"
               >
                 <span>Следующий урок</span>
                 <ArrowRight size={20} />
@@ -354,6 +446,98 @@ const getRentLesson2Content = () => {
         <li>Почему торопите с решением?</li>
         <li>Вы собственник или агент?</li>
         <li>Можно ли записать номер вашего паспорта в договоре?</li>
+      </ul>
+    </>
+  );
+};
+
+// Контент третьего урока по съему квартиры
+const getRentLesson3Content = () => {
+  return (
+    <>
+      <h1>Документы – базовый минимум</h1>
+      
+      <p>
+        Основные документы, которые должен показать арендодатель
+      </p>
+
+      <h2>1. Паспорт арендодателя</h2>
+      
+      <ul>
+        <li>Сверьте ФИО, дату рождения, прописку.</li>
+        <li>Проверьте, что паспорт действителен, не просрочен и не выглядит подделанным.</li>
+        <li>В договоре найма ФИО должно совпадать с паспортными данными.</li>
+      </ul>
+
+      <h2>2. Документ, подтверждающий право собственности</h2>
+      
+      <ul>
+        <li>Выписка из ЕГРН (Единый государственный реестр недвижимости) — актуальный документ.</li>
+        <li>Проверить можно на сайте <a href="https://rosreestr.gov.ru" target="_blank" rel="noopener noreferrer">rosreestr.gov.ru</a></li>
+      </ul>
+
+      <p>Подойдёт также:</p>
+      
+      <ul>
+        <li>Договор купли-продажи,</li>
+        <li>Свидетельство о праве собственности (старого образца),</li>
+        <li>Договор дарения,</li>
+        <li>Нотариальное свидетельство о вступлении в наследство (Важно: ФИО в этом документе должно совпадать с паспортом арендодателя.)</li>
+      </ul>
+
+      <h2>3. Доверенность (если сдаёт не собственник)</h2>
+      
+      <p>Если квартиру показывает и сдаёт не сам владелец, требуйте:</p>
+      
+      <ul>
+        <li>Нотариально заверенную доверенность с правом сдачи в аренду;</li>
+        <li>Срок действия доверенности должен быть действующим;</li>
+        <li>ФИО доверенного лица в договоре должны совпадать с доверенностью.</li>
+        <li>Сфотографируйте доверенность или перепишите реквизиты.</li>
+      </ul>
+
+      <h2>4. Выписка о зарегистрированных жильцах</h2>
+      
+      <p>
+        В ЖЭУ, МФЦ или через Госуслуги можно получить выписку о лицах, зарегистрированных в квартире. (Важно: убедитесь, что никто не прописан, особенно несовершеннолетние — иначе возможны юридические проблемы при выселении.)
+      </p>
+
+      <h2>5. Счётчики и квитанции</h2>
+      
+      <ul>
+        <li>Запросите последние квитанции по коммунальным услугам: свет, вода, газ, интернет.</li>
+        <li>Проверьте, что:</li>
+      </ul>
+      
+      <ul>
+        <li>нет долгов,</li>
+        <li>показания счётчиков реальные,</li>
+        <li>указаны те же ФИО и адрес.</li>
+      </ul>
+
+      <h2>6. Акт приёма-передачи квартиры и имущества</h2>
+      
+      <p>
+        составляется при подписании договора.
+      </p>
+
+      <p>Указывается:</p>
+      
+      <ul>
+        <li>состояние квартиры,</li>
+        <li>список мебели и техники,</li>
+        <li>показания счётчиков,</li>
+        <li>количество ключей.</li>
+      </ul>
+
+      <p>Подписывается обеими сторонами.</p>
+
+      <h2>Признаки, что что-то не так и нужно быть осторожным</h2>
+      
+      <ul>
+        <li>Арендодатель уклоняется от показа документов.</li>
+        <li>Отказывается заключать письменный договор.</li>
+        <li>Настойчиво просит залог или предоплату до подписания бумаг.</li>
       </ul>
     </>
   );

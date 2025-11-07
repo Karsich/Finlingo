@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Settings, User } from 'lucide-react';
 import './TopicArticles.css';
 import { progressAPI } from '../services/api';
@@ -7,6 +7,7 @@ import { progressAPI } from '../services/api';
 const TopicArticles = () => {
   const { topic } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [hoveredLesson, setHoveredLesson] = useState(null);
 
   // Определяем заголовок темы
@@ -20,7 +21,7 @@ const TopicArticles = () => {
   const [lessonStatusByNumber, setLessonStatusByNumber] = useState({});
 
   useEffect(() => {
-    const load = async () => {
+    const loadProgress = async () => {
       try {
         const res = await progressAPI.getByTopic(topicSlug);
         const map = {};
@@ -44,12 +45,22 @@ const TopicArticles = () => {
         setLessonStatusByNumber({ 1: 'active' });
       }
     };
-    load();
-  }, [topicSlug]);
+
+    loadProgress();
+  }, [topicSlug, location.pathname]);
 
   // Ротация цветов: [#F8A720, #C97200, #C97200, #642714]
   const palette = ['#F8A720', '#C97200', '#642714'];
   const getLessonColor = (lessonNumber) => palette[(lessonNumber - 1) % 3];
+
+  // Проверяем, существует ли урок
+  const lessonExists = (lessonNumber) => {
+    if (topic === 'rent') {
+      const existingLessons = [1, 2, 3]; // Список существующих уроков
+      return existingLessons.includes(lessonNumber);
+    }
+    return false;
+  };
 
   // Получаем название урока
   const getLessonTitle = (lessonNumber) => {
@@ -58,6 +69,9 @@ const TopicArticles = () => {
     }
     if (topic === 'rent' && lessonNumber === 2) {
       return 'Вопрос – копейку бережет';
+    }
+    if (topic === 'rent' && lessonNumber === 3) {
+      return 'Документы – базовый минимум';
     }
     return `Урок ${lessonNumber}`;
   };
@@ -80,7 +94,12 @@ const TopicArticles = () => {
     return positions[lessonNumber] || { left: '0px', top: '0px' };
   };
 
-  const handleLessonClick = (lessonNumber) => {
+  const handleLessonClick = async (lessonNumber) => {
+    // Проверяем, существует ли урок
+    if (!lessonExists(lessonNumber)) {
+      return; // Не переходим к несуществующему уроку
+    }
+
     // Первый урок всегда доступен
     if (lessonNumber === 1) {
       navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
@@ -89,17 +108,39 @@ const TopicArticles = () => {
     
     // Для остальных уроков проверяем статус
     const status = lessonStatusByNumber[lessonNumber];
-    // Если статуса нет или он 'locked', урок заблокирован
-    if (!status || status === 'locked') {
+    
+    // Если урок имеет статус 'active' или 'completed', он доступен
+    if (status === 'active' || status === 'completed') {
+      navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
       return;
     }
     
     // Проверяем, что предыдущий урок пройден
     const previousStatus = lessonStatusByNumber[lessonNumber - 1];
-    if (previousStatus !== 'completed' && lessonNumber > 1) {
+    if (previousStatus === 'completed') {
+      // Предыдущий урок пройден, но текущий еще не активен - попробуем обновить прогресс
+      try {
+        await progressAPI.markActive(topicSlug, lessonNumber);
+        // Обновляем локальный статус
+        setLessonStatusByNumber(prev => ({
+          ...prev,
+          [lessonNumber]: 'active'
+        }));
+        navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
+      } catch (error) {
+        console.error('Ошибка активации урока:', error);
+        // Все равно пытаемся перейти
+        navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
+      }
       return;
     }
     
+    // Если статуса нет или он 'locked', и предыдущий не пройден - урок заблокирован
+    if (!status || status === 'locked') {
+      return;
+    }
+    
+    // В остальных случаях разрешаем переход (на случай если данные не синхронизированы)
     navigate(`/topic/${topicSlug}/lesson/${lessonNumber}`);
   };
 
@@ -215,8 +256,12 @@ const TopicArticles = () => {
                 // Первый урок всегда активен по умолчанию
                 const defaultStatus = lessonNumber === 1 ? 'active' : 'locked';
                 const status = lessonStatusByNumber[lessonNumber] || defaultStatus;
-                const isInactive = !(status === 'active' || status === 'completed');
+                const exists = lessonExists(lessonNumber);
+                // Урок неактивен, если он не существует или статус locked/нет статуса
+                const isInactive = !exists || !(status === 'active' || status === 'completed');
                 const isHovered = hoveredLesson === lessonNumber;
+                // Яркость несуществующих уроков такая же, как неактивных
+                const opacity = exists ? (isInactive ? 0.3 : 1) : 0.3;
 
                 return (
                   <div
@@ -225,13 +270,15 @@ const TopicArticles = () => {
                     style={{
                       left: position.left,
                       top: position.top,
+                      cursor: exists ? (isInactive ? 'not-allowed' : 'pointer') : 'default',
+                      opacity: opacity,
                     }}
-                    onMouseEnter={() => setHoveredLesson(lessonNumber)}
+                    onMouseEnter={() => exists && setHoveredLesson(lessonNumber)}
                     onMouseLeave={() => setHoveredLesson(null)}
-                    onClick={() => handleLessonClick(lessonNumber)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleLessonClick(lessonNumber); } }}
+                    onClick={() => exists && handleLessonClick(lessonNumber)}
+                    role={exists ? "button" : undefined}
+                    tabIndex={exists ? 0 : -1}
+                    onKeyDown={(e) => { if (exists && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); handleLessonClick(lessonNumber); } }}
                   >
                     <svg 
                       className="lesson-pentagon"

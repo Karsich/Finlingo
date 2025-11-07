@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import TopicArticles from './pages/TopicArticles';
 import Lesson from './pages/Lesson';
+import Task from './pages/Task';
 import './App.css';
 
 function AppContent() {
@@ -54,6 +55,14 @@ function AppContent() {
                 element={
                   <ProtectedRoute>
                     <Lesson />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/topic/:topic/lesson/:lessonNumber/task/:taskNumber" 
+                element={
+                  <ProtectedRoute>
+                    <Task />
                   </ProtectedRoute>
                 } 
               />
