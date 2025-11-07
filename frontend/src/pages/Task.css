@@ -120,17 +120,22 @@
 /* Highlight Task */
 .highlight-task h2 {
   font-family: 'Inter', sans-serif;
+  font-style: normal;
   font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 30px;
-  color: #000;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.03em;
+  color: #F8A720;
+  margin: 0 0 30px 0;
 }
 
 .highlight-text {
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
   line-height: 1.8;
-  color: #000;
+  color: #000000;
 }
 
 .text-part {
@@ -139,18 +144,26 @@
   border-radius: 4px;
   transition: background 0.2s;
   background: #FFEBCA;
+  font-weight: 400;
 }
 
 .text-part:hover {
   background: #FFE0A0;
 }
 
+.text-part.part-selected {
+  background: #F8A720;
+  font-weight: 400;
+}
+
 .text-part.part-correct {
   background: #D9ED81;
+  font-weight: 400;
 }
 
 .text-part.part-incorrect {
   background: #FB8F95;
+  font-weight: 400;
 }
 
 /* Matching Task */
@@ -167,7 +180,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border: 3px solid #C97200;
+  border: 0.75px solid #C97200;
   border-radius: 30px;
   overflow: hidden;
   margin-top: 20px;
@@ -176,7 +189,7 @@
 
 .matching-table th,
 .matching-table td {
-  border: 3px solid #C97200;
+  border: 0.75px solid #C97200;
 }
 
 .matching-table th {
@@ -193,15 +206,15 @@
 }
 
 .matching-table thead tr:first-child th:first-child {
-  border-radius: 27px 0px 0px 0px;
-  border-left: 3px solid #C97200;
-  border-top: 3px solid #C97200;
+  border-radius: 28.5px 0px 0px 0px;
+  border-left: 0.75px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .matching-table thead tr:first-child th:last-child {
-  border-radius: 0px 27px 0px 0px;
-  border-right: 3px solid #C97200;
-  border-top: 3px solid #C97200;
+  border-radius: 0px 28.5px 0px 0px;
+  border-right: 0.75px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .matching-table td {
@@ -217,31 +230,31 @@
 .matching-table td:first-child {
   color: #C97200;
   font-weight: 600;
-  border-left: 3px solid #C97200;
+  border-left: 0.75px solid #C97200;
 }
 
 .matching-table td:last-child {
-  border-right: 3px solid #C97200;
+  border-right: 0.75px solid #C97200;
 }
 
 .matching-table tbody tr:first-child td {
-  border-top: 3px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .matching-table tbody tr:last-child td {
-  border-bottom: 3px solid #C97200;
+  border-bottom: 0.75px solid #C97200;
 }
 
 .matching-table tbody tr:last-child td:first-child {
-  border-radius: 0px 0px 0px 27px;
-  border-left: 3px solid #C97200;
-  border-bottom: 3px solid #C97200;
+  border-radius: 0px 0px 0px 28.5px;
+  border-left: 0.75px solid #C97200;
+  border-bottom: 0.75px solid #C97200;
 }
 
 .matching-table tbody tr:last-child td:last-child {
-  border-radius: 0px 0px 27px 0px;
-  border-right: 3px solid #C97200;
-  border-bottom: 3px solid #C97200;
+  border-radius: 0px 0px 28.5px 0px;
+  border-right: 0.75px solid #C97200;
+  border-bottom: 0.75px solid #C97200;
 }
 
 .match-cell {
@@ -340,9 +353,22 @@
   margin-top: 40px;
 }
 
+.task-reference-default {
+  /* Стили для заданий 1-5 (multiple_choice) - как было раньше */
+}
+
+.task-reference-highlight {
+  /* Стили для заданий 6-14 (highlight) - внутри рамки задания */
+  width: 100%;
+  background: #FFEBCA;
+  border-radius: 30px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
 .reference-table {
   box-sizing: border-box;
-  border: 3px solid #C97200;
+  border: 0.75px solid #C97200;
   border-radius: 30px;
   width: 100%;
   border-collapse: separate;
@@ -363,20 +389,20 @@
   color: #C97200;
   padding: 15px 20px;
   text-align: left;
-  border: 3px solid #C97200;
+  border: 0.75px solid #C97200;
   vertical-align: middle;
 }
 
 .reference-table thead tr:first-child th:first-child {
-  border-radius: 27px 0px 0px 0px;
-  border-left: 3px solid #C97200;
-  border-top: 3px solid #C97200;
+  border-radius: 28.5px 0px 0px 0px;
+  border-left: 0.75px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .reference-table thead tr:first-child th:last-child {
-  border-radius: 0px 27px 0px 0px;
-  border-right: 3px solid #C97200;
-  border-top: 3px solid #C97200;
+  border-radius: 0px 28.5px 0px 0px;
+  border-right: 0.75px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .reference-table td {
@@ -388,41 +414,75 @@
   letter-spacing: -0.03em;
   color: #000000;
   padding: 15px 20px;
-  border: 3px solid #C97200;
+  border: 0.75px solid #C97200;
   vertical-align: middle;
 }
 
 .reference-table td:first-child {
   color: #C97200;
   font-weight: 600;
-  border-left: 3px solid #C97200;
+  border-left: 0.75px solid #C97200;
 }
 
 .reference-table td:last-child {
-  border-right: 3px solid #C97200;
+  border-right: 0.75px solid #C97200;
 }
 
 .reference-table tbody tr:first-child td {
-  border-top: 3px solid #C97200;
+  border-top: 0.75px solid #C97200;
 }
 
 .reference-table tbody tr:last-child td {
-  border-bottom: 3px solid #C97200;
+  border-bottom: 0.75px solid #C97200;
 }
 
 .reference-table tbody tr:last-child td:first-child {
-  border-radius: 0px 0px 0px 27px;
+  border-radius: 0px 0px 0px 28.5px;
 }
 
 .reference-table tbody tr:last-child td:last-child {
-  border-radius: 0px 0px 27px 0px;
+  border-radius: 0px 0px 28.5px 0px;
 }
 
 .reference-text {
   font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
   line-height: 1.6;
-  color: #000;
+  color: #000000;
+  white-space: pre-line;
+}
+
+.reference-text strong {
+  font-weight: 700;
+}
+
+.reference-text ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.reference-text ul li {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: -0.03em;
+  color: #000000;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.reference-text ul li::before {
+  content: '•';
+  color: #C97200;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
 }
 
 /* Навигация между заданиями */

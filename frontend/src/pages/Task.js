@@ -129,19 +129,16 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     6: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 1',
-      textParts: [
-        { id: 1, text: '«Продаётся уютная 1-комнатная квартира в центре города, всего за ', isCorrect: false, clicked: false },
-        { id: 2, text: '4 000 000 ₽!', isCorrect: true, clicked: false },
-        { id: 3, text: ' Светлая, просторная, с новым дизайнерским ремонтом, мебелью и бытовой техникой. Заезжай и живи — ничего делать не нужно. ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Срочная продажа в связи с переездом, цена действует только сегодня.', isCorrect: true, clicked: false },
-        { id: 5, text: ' ', isCorrect: false, clicked: false },
-        { id: 6, text: 'Осмотр возможен по видеосвязи, так как собственник временно в командировке.', isCorrect: true, clicked: false },
-        { id: 7, text: ' Для бронирования просьба внести небольшой задаток — всего ', isCorrect: false, clicked: false },
-        { id: 8, text: '50 000 ₽, чтобы снять с публикации.', isCorrect: true, clicked: false },
-        { id: 9, text: ' Документы готовы, ', isCorrect: false, clicked: false },
-        { id: 10, text: 'покажу сканы по запросу.', isCorrect: true, clicked: false },
-        { id: 11, text: '»', isCorrect: false, clicked: false }
+      title: 'Задание 6 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.',
+      text: '«Продаётся уютная 1-комнатная квартира в центре города, всего за 4 000 000 ₽! Светлая, просторная, с новым дизайнерским ремонтом, мебелью и бытовой техникой. Заезжай и живи — ничего делать не нужно. Срочная продажа в связи с переездом, цена действует только сегодня. Осмотр возможен по видеосвязи, так как собственник временно в командировке. Для бронирования просьба внести небольшой задаток — всего 50 000 ₽, чтобы снять с публикации. Документы готовы, покажу сканы по запросу.»',
+      highlights: [
+        { id: 1, text: 'с новым дизайнерским ремонтом', isCorrect: false, startIndex: 87, endIndex: 122 },
+        { id: 2, text: 'ничего делать не нужно', isCorrect: false, startIndex: 159, endIndex: 181 },
+        { id: 3, text: 'Срочная продажа в связи с переездом', isCorrect: false, startIndex: 183, endIndex: 221 },
+        { id: 4, text: 'цена действует только сегодня', isCorrect: true, startIndex: 223, endIndex: 252 },
+        { id: 5, text: 'по видеосвязи, так как собственник временно в командировке', isCorrect: true, startIndex: 269, endIndex: 327 },
+        { id: 6, text: 'всего 50 000 ₽, чтобы снять с публикации', isCorrect: true, startIndex: 374, endIndex: 414 },
+        { id: 7, text: 'покажу сканы по запросу', isCorrect: true, startIndex: 430, endIndex: 453 }
       ],
       reference: {
         type: 'text',
@@ -150,15 +147,13 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     7: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 2',
-      textParts: [
-        { id: 1, text: '«Продаётся просторная 2-комнатная квартира в современном ЖК «Элит-Парк». Качественный монолитный дом, развитая инфраструктура, охраняемая территория. ', isCorrect: false, clicked: false },
-        { id: 2, text: 'Цена указана ориентировочно, актуальные предложения уточняйте у менеджера.', isCorrect: true, clicked: false },
-        { id: 3, text: '  ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Этот объект уже забронирован, но есть другие аналогичные квартиры в этом же доме.', isCorrect: true, clicked: false },
-        { id: 5, text: ' Позвоните, и мы подберём вариант под ваш бюджет — от 5 800 000 ₽. ', isCorrect: false, clicked: false },
-        { id: 6, text: 'Осмотр возможен по предварительной записи через офис продаж.', isCorrect: true, clicked: false },
-        { id: 7, text: ' При необходимости поможем с ипотекой и юридическим сопровождением.»', isCorrect: false, clicked: false }
+      title: 'Задание 7 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.',
+      text: '«Продаётся просторная 2-комнатная квартира в современном ЖК «Элит-Парк». Качественный монолитный дом, развитая инфраструктура, охраняемая территория. Цена указана ориентировочно, актуальные предложения уточняйте у менеджера.  Этот объект уже забронирован, но есть другие аналогичные квартиры в этом же доме. Позвоните, и мы подберём вариант под ваш бюджет — от 5 800 000 ₽. Осмотр возможен по предварительной записи через офис продаж. При необходимости поможем с ипотекой и юридическим сопровождением.»',
+      highlights: [
+        { id: 1, text: 'ориентировочно', isCorrect: true, startIndex: 141, endIndex: 155 },
+        { id: 2, text: 'актуальные предложения уточняйте у менеджера', isCorrect: false, startIndex: 157, endIndex: 203 },
+        { id: 3, text: 'Этот объект уже забронирован', isCorrect: true, startIndex: 206, endIndex: 235 },
+        { id: 4, text: 'Осмотр возможен по предварительной записи через офис продаж', isCorrect: false, startIndex: 319, endIndex: 380 }
       ],
       reference: {
         type: 'text',
@@ -167,18 +162,15 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     8: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 3',
-      textParts: [
-        { id: 1, text: '«Срочно продаю 3-комнатную квартиру с видом на реку. Просторная гостиная, раздельные комнаты, свежий ремонт. ', isCorrect: false, clicked: false },
-        { id: 2, text: 'Цена снижена до 3 000 000 ₽, только при быстрой сделке.', isCorrect: true, clicked: false },
-        { id: 3, text: ' ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Возможен показ после внесения аванса 50 000 ₽ — для подтверждения серьёзности намерений.', isCorrect: true, clicked: false },
-        { id: 5, text: ' Все документы в порядке, ', isCorrect: false, clicked: false },
-        { id: 6, text: 'оригиналы на регистрации, предоставлю копии.', isCorrect: true, clicked: false },
-        { id: 7, text: ' ', isCorrect: false, clicked: false },
-        { id: 8, text: 'Собственник надёжный, работаем через доверенное лицо.', isCorrect: true, clicked: false },
-        { id: 9, text: ' Квартира свободна, подходит под ипотеку. ', isCorrect: false, clicked: false },
-        { id: 10, text: 'Успейте забронировать, предложение ограничено!»', isCorrect: true, clicked: false }
+      title: 'Задание 8 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 3',
+      text: '«Срочно продаю 3-комнатную квартиру с видом на реку. Просторная гостиная, раздельные комнаты, свежий ремонт. Цена снижена до 3 000 000 ₽, только при быстрой сделке. Возможен показ после внесения аванса 50 000 ₽ — для подтверждения серьёзности намерений. Все документы в порядке, оригиналы на регистрации, предоставлю копии. Собственник надёжный, работаем через доверенное лицо. Квартира свободна, подходит под ипотеку. Успейте забронировать, предложение ограничено!»',
+      highlights: [
+        { id: 1, text: 'Цена снижена', isCorrect: false, startIndex: 95, endIndex: 108 },
+        { id: 2, text: 'только при быстрой сделке', isCorrect: true, startIndex: 125, endIndex: 152 },
+        { id: 3, text: 'показ после внесения аванса', isCorrect: false, startIndex: 154, endIndex: 183 },
+        { id: 4, text: 'для подтверждения серьёзности намерений', isCorrect: true, startIndex: 192, endIndex: 232 },
+        { id: 5, text: 'оригиналы на регистрации', isCorrect: true, startIndex: 256, endIndex: 280 },
+        { id: 6, text: 'Успейте забронировать, предложение ограничено', isCorrect: false, startIndex: 349, endIndex: 395 }
       ],
       reference: {
         type: 'text',
@@ -187,15 +179,15 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     9: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 4',
-      textParts: [
-        { id: 1, text: '«Продаётся 1-комнатная квартира в спальном районе. Тихие соседи, рядом магазины, детский сад и транспорт. ', isCorrect: false, clicked: false },
-        { id: 2, text: 'Все документы заверены и находятся у нотариуса, сделка проводится быстро.', isCorrect: true, clicked: false },
-        { id: 3, text: ' ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Оригиналы сейчас в другом городе, но есть копии — покажу при встрече.', isCorrect: true, clicked: false },
-        { id: 5, text: ' ', isCorrect: false, clicked: false },
-        { id: 6, text: 'При желании можем оформить через знакомого нотариуса, недорого и без проволочек.', isCorrect: true, clicked: false },
-        { id: 7, text: ' Осмотр возможен по предварительной договорённости.»', isCorrect: false, clicked: false }
+      title: 'Задание 9 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 4',
+      text: '«Продаётся 1-комнатная квартира в спальном районе. Тихие соседи, рядом магазины, детский сад и транспорт. Все документы заверены и находятся у нотариуса, сделка проводится быстро. Оригиналы сейчас в другом городе, но есть копии — покажу при встрече. При желании можем оформить через знакомого нотариуса, недорого и без проволочек. Осмотр возможен по предварительной договорённости.»',
+      highlights: [
+        { id: 1, text: 'заверены и находятся у нотариуса', isCorrect: true, startIndex: 108, endIndex: 141 },
+        { id: 2, text: 'сделка проводится быстро', isCorrect: false, startIndex: 143, endIndex: 167 },
+        { id: 3, text: 'Оригиналы сейчас в другом городе, но есть копии', isCorrect: false, startIndex: 169, endIndex: 216 },
+        { id: 4, text: 'покажу при встрече', isCorrect: true, startIndex: 219, endIndex: 237 },
+        { id: 5, text: 'через знакомого нотариуса, недорого и без проволочек', isCorrect: true, startIndex: 260, endIndex: 312 },
+        { id: 6, text: 'Осмотр возможен по предварительной договорённости', isCorrect: false, startIndex: 314, endIndex: 365 }
       ],
       reference: {
         type: 'text',
@@ -204,9 +196,12 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     10: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 5',
-      textParts: [
-        { id: 1, text: '«Продаётся уютная 2-комнатная квартира 58 м² в кирпичном доме 1995 года постройки. Квартира чистая, тёплая, в хорошем состоянии: косметический ремонт, стеклопакеты, заменены трубы. Собственник один, в собственности более 5 лет. Выписка ЕГРН и паспорт — при встрече. Осмотр возможен по выходным, торг уместен после просмотра. Тихий двор, рядом школа, магазины, остановка. Подходит под ипотеку, без обременений.»', isCorrect: false, clicked: false }
+      title: 'Задание 10 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 5',
+      text: '«Продаётся уютная 2-комнатная квартира 58 м² в кирпичном доме 1995 года постройки. Квартира чистая, тёплая, в хорошем состоянии: косметический ремонт, стеклопакеты, заменены трубы. Собственник один, в собственности более 5 лет. Выписка ЕГРН и паспорт — при встрече. Осмотр возможен по выходным, торг уместен после просмотра. Тихий двор, рядом школа, магазины, остановка. Подходит под ипотеку, без обременений.»',
+      highlights: [
+        { id: 1, text: 'при встрече', isCorrect: false, startIndex: 201, endIndex: 213 },
+        { id: 2, text: 'Осмотр возможен по выходным', isCorrect: false, startIndex: 215, endIndex: 243 },
+        { id: 3, text: 'Подходит под ипотеку', isCorrect: false, startIndex: 295, endIndex: 316 }
       ],
       reference: {
         type: 'text',
@@ -215,13 +210,13 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     11: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 6',
-      textParts: [
-        { id: 1, text: '«Продаётся элитная 4-комнатная квартира 130 м² с панорамным остеклением и дизайнерским ремонтом. Квартира полностью укомплектована техникой и мебелью. ', isCorrect: false, clicked: false },
-        { id: 2, text: 'Документы готовы, покажем по запросу после внесения брони.', isCorrect: true, clicked: false },
-        { id: 3, text: ' ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Работаем по доверенности от собственника, оформление у нотариуса.', isCorrect: true, clicked: false },
-        { id: 5, text: ' Уникальное предложение для тех, кто ценит комфорт и престиж!»', isCorrect: false, clicked: false }
+      title: 'Задание 11 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 6',
+      text: '«Продаётся элитная 4-комнатная квартира 130 м² с панорамным остеклением и дизайнерским ремонтом. Квартира полностью укомплектована техникой и мебелью. Документы готовы, покажем по запросу после внесения брони. Работаем по доверенности от собственника, оформление у нотариуса. Уникальное предложение для тех, кто ценит комфорт и престиж!»',
+      highlights: [
+        { id: 1, text: 'Квартира полностью укомплектована техникой и мебелью. Документы готовы', isCorrect: false, startIndex: 99, endIndex: 168 },
+        { id: 2, text: 'покажем по запросу после внесения брони', isCorrect: true, startIndex: 170, endIndex: 207 },
+        { id: 3, text: 'Работаем по доверенности от собственника', isCorrect: true, startIndex: 209, endIndex: 248 },
+        { id: 4, text: 'оформление у нотариуса', isCorrect: false, startIndex: 250, endIndex: 272 }
       ],
       reference: {
         type: 'text',
@@ -230,25 +225,28 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     12: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 7',
-      textParts: [
-        { id: 1, text: '«Продаётся 1-комнатная квартира площадью 35 м² с просторной кухней 20 м² и потолками 4 м. Квартира идеально подойдёт под сдачу в аренду. ', isCorrect: false, clicked: false },
-        { id: 2, text: 'Все замеры производились вручную, поэтому возможны незначительные расхождения.', isCorrect: true, clicked: false },
-        { id: 3, text: ' ', isCorrect: false, clicked: false },
-        { id: 4, text: 'Адрес на карте указан верно, но дом пока не отображается в сервисах — новостройка без регистрации.', isCorrect: true, clicked: false },
-        { id: 5, text: ' ', isCorrect: false, clicked: false },
-        { id: 6, text: 'Документы предоставим на сделке, оформление быстрое.»', isCorrect: true, clicked: false }
+      title: 'Задание 12 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 7',
+      text: '«Продаётся 1-комнатная квартира площадью 35 м² с просторной кухней 20 м² и потолками 4 м. Квартира идеально подойдёт под сдачу в аренду. Все замеры производились вручную, поэтому возможны незначительные расхождения. Адрес на карте указан верно, но дом пока не отображается в сервисах — новостройка без регистрации. Документы предоставим на сделке, оформление быстрое.»',
+      highlights: [
+        { id: 1, text: 'производились вручную', isCorrect: true, startIndex: 120, endIndex: 140 },
+        { id: 2, text: 'возможны незначительные расхождения', isCorrect: false, startIndex: 152, endIndex: 188 },
+        { id: 3, text: 'пока не отображается в сервисах — новостройка без регистрации', isCorrect: true, startIndex: 220, endIndex: 280 },
+        { id: 4, text: 'Документы предоставим на сделке', isCorrect: false, startIndex: 282, endIndex: 315 }
       ],
       reference: {
         type: 'text',
-        text: 'Что нужно делать в таком случае:\n\n• Не переводить деньги за «бронь» до личного осмотра квартиры и проверки документов.\n• Попросить указать точный адрес и кадастровый номер объекта.\n• Заказать выписку из ЕГРН, чтобы проверить, кто является собственником.\n• Попросить показать оригинал доверенности, если продавец действует «по доверенности от собственника».\n• Проверить доверенность у нотариуса, который её выдал — действительно ли она существует и не отозвана.\n• Сделать обратный поиск фотографий квартиры через Google или Яндекс, чтобы убедиться, что они не взяты из стоков или других объявлений.\n• Проверить, указан ли нотариус в государственном реестре\n• Не соглашаться на сделку, если продавец избегает встречи, скрывает адрес или требует быстрых решений.'
+        text: 'Что нужно делать в таком случае:\n\n• Не переводить деньги за «бронь» до личного осмотра квартиры и проверки документов.\n• Попросить указать точный адрес и кадастровый номер объекта.\n• Заказать выписку из ЕГРН, чтобы проверить, кто является собственником.\n• Попросить показать оригинал доверенности, если продавец действует «по доверенности от собственника».\n• Проверить доверенность у нотариуса, который её выдал — действительно ли она существует и не отозвана.\n• Сделать обратный поиск фотографий квартиры через Google или Яндекс, чтобы убедиться, что они не взяты из стоков или других объявлений.\n• Проверить, указан ли нотариус в государственном реестре.\n• Не соглашаться на сделку, если продавец избегает встречи, скрывает адрес или требует быстрых решений.'
       }
     },
     13: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 8',
-      textParts: [
-        { id: 1, text: '«Продаётся студия 22 м² после капитального ремонта, с индивидуальным отоплением. Чистая, светлая, окна на юг, тихий двор. Собственник один, без обременений. Выписка ЕГРН и паспорт — при встрече. Осмотр по договорённости, возможен торг при реальном интересе. Отличный вариант для студентов и тех, кто ищет небольшое жильё без лишних хлопот.»', isCorrect: false, clicked: false }
+      title: 'Задание 13 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 8',
+      text: '«Продаётся студия 22 м² после капитального ремонта, с индивидуальным отоплением. Чистая, светлая, окна на юг, тихий двор. Собственник один, без обременений. Все документы в порядке, покажу оригиналы при встрече. Подходит под ипотеку. Осмотр по договорённости, возможен торг при реальном интересе. Отличный вариант для студентов и тех, кто ищет небольшое жильё без лишних хлопот.»',
+      highlights: [
+        { id: 1, text: 'Собственник один', isCorrect: false, startIndex: 108, endIndex: 124 },
+        { id: 2, text: 'покажу оригиналы при встрече', isCorrect: false, startIndex: 161, endIndex: 190 },
+        { id: 3, text: 'Осмотр по договорённости', isCorrect: false, startIndex: 207, endIndex: 231 },
+        { id: 4, text: 'возможен торг при реальном интересе', isCorrect: true, startIndex: 233, endIndex: 267 }
       ],
       reference: {
         type: 'text',
@@ -257,9 +255,11 @@ const getRentLesson3Tasks = (taskNum) => {
     },
     14: {
       type: 'highlight',
-      question: 'Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 9',
-      textParts: [
-        { id: 1, text: '«Продаётся 3-комнатная квартира 80 м², вторичка, один собственник, без обременений. Дом кирпичный, тёплый, рядом школа и парк. Выписка ЕГРН и коммунальные чеки предоставляются при осмотре. Осмотр по договорённости, торг уместен. Расчёт через нотариуса или банк, наличные не принимаем. Отличный вариант для семьи, всё готово к заселению.»', isCorrect: false, clicked: false }
+      title: 'Задание 14 Найди скрытый риск» — найдите все скрытые риски в описании объявления квартиры.\n\nОбъявление 9',
+      text: '«Продаётся 3-комнатная квартира 80 м², вторичка, один собственник, без обременений. Дом кирпичный, тёплый, рядом школа и парк. Выписка ЕГРН и коммунальные чеки предоставляются при осмотре. Осмотр по договорённости, торг уместен. Расчёт через нотариуса или банк, наличные не принимаем. Отличный вариант для семьи, всё готово к заселению.»',
+      highlights: [
+        { id: 1, text: 'чеки предоставляются при осмотре', isCorrect: false, startIndex: 130, endIndex: 163 },
+        { id: 2, text: 'Расчёт через нотариуса или банк, наличные не принимаем', isCorrect: false, startIndex: 195, endIndex: 250 }
       ],
       reference: {
         type: 'text',
@@ -317,10 +317,9 @@ const Task = () => {
     if (task.type === 'multiple_choice') {
       setTaskState({ selected: [] });
     } else if (task.type === 'highlight') {
-      setTaskState({ 
-        highlights: task.textParts ? task.textParts.map(p => ({ ...p })) : [],
-        referenceVisible: false 
-      });
+      // Инициализируем highlights из task.highlights
+      const highlights = task.highlights ? task.highlights.map(h => ({ ...h, selected: false, clicked: false })) : [];
+      setTaskState({ selectedHighlights: [], highlights, referenceVisible: false });
     } else if (task.type === 'matching') {
       setTaskState({ 
         matches: task.matches ? task.matches.map(m => ({ ...m })) : [],
@@ -362,6 +361,8 @@ const Task = () => {
       correct = checkMultipleChoice(taskData, taskState.selected || []);
     } else if (taskData.type === 'matching') {
       correct = checkMatching(taskData, taskState.matches || []);
+    } else if (taskData.type === 'highlight') {
+      correct = checkHighlight(taskData, taskState.selectedHighlights || []);
     }
 
     // Если ответ неправильный, снимаем жизнь только один раз (при первом ответе)
@@ -381,6 +382,21 @@ const Task = () => {
       }
     }
 
+    // Для highlight заданий отмечаем выбранные элементы как "clicked"
+    if (taskData.type === 'highlight') {
+      const highlights = [...(taskState.highlights || [])];
+      const selectedHighlights = taskState.selectedHighlights || [];
+      
+      highlights.forEach(highlight => {
+        if (selectedHighlights.includes(highlight.id)) {
+          highlight.clicked = true;
+          highlight.selected = true;
+        }
+      });
+      
+      updateTaskState({ highlights, referenceVisible: true });
+    }
+
     setAnswered(true);
     setIsCorrect(correct);
     setShowReference(true);
@@ -388,19 +404,33 @@ const Task = () => {
     if (correct) {
       toast.success('Правильный ответ!');
       // TODO: Обновить прогресс заданий
+    } else if (taskData.type === 'highlight') {
+      toast.error('Не все правильные элементы выбраны или выбраны неправильные.');
     }
   };
 
   const handleReset = () => {
     setAnswered(false);
     setIsCorrect(false);
-    setShowReference(false);
+    // Не скрываем справку при сбросе - она должна оставаться видимой
+    // setShowReference(false); - не вызываем, чтобы справка оставалась
+    
     if (taskData.type === 'multiple_choice') {
       setTaskState({ selected: [] });
+      // Справка остается видимой через showReference (не меняем его)
     } else if (taskData.type === 'matching') {
       setTaskState({ 
         matches: taskData.matches ? taskData.matches.map(m => ({ ...m, selected: null })) : [],
         showOptions: null 
+      });
+      // Справка остается видимой через showReference (не меняем его)
+    } else if (taskData.type === 'highlight') {
+      // Сбрасываем состояние highlight заданий, но сохраняем видимость справки
+      const resetHighlights = taskData.highlights ? taskData.highlights.map(h => ({ ...h, clicked: false, selected: false })) : [];
+      setTaskState({ 
+        selectedHighlights: [],
+        highlights: resetHighlights,
+        referenceVisible: true // Сохраняем видимость справки
       });
     }
   };
@@ -415,34 +445,32 @@ const Task = () => {
     return matches.every(m => m.selected === m.correct);
   };
 
-  const handleHighlightClick = async (partId) => {
+  const checkHighlight = (task, selectedIds) => {
+    const correctIds = task.highlights.filter(h => h.isCorrect).map(h => h.id);
+    const incorrectIds = task.highlights.filter(h => !h.isCorrect).map(h => h.id);
+    
+    // Проверяем, что выбраны все правильные и ни одного неправильного
+    const allCorrectSelected = correctIds.every(id => selectedIds.includes(id));
+    const noIncorrectSelected = !incorrectIds.some(id => selectedIds.includes(id));
+    
+    return allCorrectSelected && noIncorrectSelected && selectedIds.length === correctIds.length;
+  };
+
+  const handleHighlightClick = (highlightId) => {
     if (answered) return;
     
-    const highlights = [...(taskState.highlights || [])];
-    const part = highlights.find(p => p.id === partId);
-    if (!part || part.clicked) return;
-
-    part.clicked = true;
-    part.selected = part.isCorrect;
+    const selectedHighlights = [...(taskState.selectedHighlights || [])];
+    const index = selectedHighlights.indexOf(highlightId);
     
-    updateTaskState({ 
-      highlights,
-      referenceVisible: true 
-    });
-
-    if (!part.isCorrect) {
-      // Снимаем жизнь при неправильном ответе
-      if (lives && lives.current_lives > 0) {
-        try {
-          await livesAPI.useLife();
-          const livesRes = await livesAPI.getMyLives();
-          setLives(livesRes.data);
-          toast.error('Неправильный ответ. Снята одна жизнь.');
-        } catch (error) {
-          console.error('Ошибка снятия жизни:', error);
-        }
-      }
+    if (index === -1) {
+      // Добавляем выделение
+      selectedHighlights.push(highlightId);
+    } else {
+      // Убираем выделение
+      selectedHighlights.splice(index, 1);
     }
+    
+    updateTaskState({ selectedHighlights });
   };
 
   if (!taskData) {
@@ -501,16 +529,17 @@ const Task = () => {
             
             {/* Справка внутри рамки */}
             {shouldShowReference && (
-              <div className="task-reference" id="task-reference">
+              <div className={`task-reference ${isHighlightTask ? 'task-reference-highlight' : 'task-reference-default'}`} id="task-reference">
                 {renderReference(taskData.reference)}
               </div>
             )}
           </div>
 
-          {taskData.type !== 'highlight' && (
+          {/* Кнопка "Ответить" / "Попробовать заново" - скрывается после правильного ответа */}
+          {!(answered && isCorrect) && (
             <button 
               onClick={answered && !isCorrect ? handleReset : handleSubmit}
-              disabled={(answered && isCorrect) || (lives && lives.current_lives === 0)}
+              disabled={(lives && lives.current_lives === 0)}
               className="task-submit-button"
             >
               {answered && !isCorrect ? 'Попробовать заново' : 'Ответить'}
@@ -572,6 +601,8 @@ const renderTaskContent = (task, taskState, updateTaskState, answered, isCorrect
           task={task} 
           taskState={taskState} 
           handleHighlightClick={handleHighlightClick}
+          answered={answered}
+          isCorrect={isCorrect}
         />
       );
     case 'matching':
@@ -652,29 +683,109 @@ const MultipleChoiceTask = ({ task, taskState, updateTaskState, answered, isCorr
 };
 
 // Компонент для заданий с выделением текста
-const HighlightTask = ({ task, taskState, handleHighlightClick }) => {
+const HighlightTask = ({ task, taskState, handleHighlightClick, answered, isCorrect }) => {
   const highlights = taskState.highlights || [];
+  const selectedHighlights = taskState.selectedHighlights || [];
+  const text = task.text || '';
+
+  // Создаем массив частей текста с встроенными выделениями
+  const renderTextWithHighlights = () => {
+    if (!highlights || highlights.length === 0) {
+      return <span>{text}</span>;
+    }
+
+    // Сортируем highlights по позиции в тексте
+    const sortedHighlights = [...highlights].sort((a, b) => a.startIndex - b.startIndex);
+    
+    const parts = [];
+    let lastIndex = 0;
+
+    sortedHighlights.forEach((highlight, index) => {
+      // Находим реальную позицию фразы в тексте, если индексы неправильные
+      let actualStartIndex = highlight.startIndex;
+      let actualEndIndex = highlight.endIndex;
+      
+      // Проверяем, что текст по указанным индексам совпадает с искомым
+      const textAtIndices = text.substring(highlight.startIndex, highlight.endIndex);
+      if (textAtIndices !== highlight.text) {
+        // Если не совпадает, ищем фразу в тексте
+        const foundIndex = text.indexOf(highlight.text, lastIndex);
+        if (foundIndex !== -1) {
+          actualStartIndex = foundIndex;
+          actualEndIndex = foundIndex + highlight.text.length;
+        }
+      }
+      
+      // Добавляем текст до выделения
+      if (actualStartIndex > lastIndex) {
+        parts.push({
+          type: 'text',
+          content: text.substring(lastIndex, actualStartIndex),
+          key: `text-${index}`
+        });
+      }
+
+      // Добавляем выделение
+      const isSelected = selectedHighlights.includes(highlight.id);
+      let highlightClass = 'text-part';
+      
+      if (answered) {
+        // После ответа показываем правильность/неправильность только выбранных элементов
+        if (isSelected) {
+          if (highlight.isCorrect) {
+            highlightClass += ' part-correct';
+          } else {
+            highlightClass += ' part-incorrect';
+          }
+        }
+      } else if (isSelected) {
+        // До ответа показываем выбранные элементы
+        highlightClass += ' part-selected';
+      }
+
+      parts.push({
+        type: 'highlight',
+        content: highlight.text,
+        highlight: highlight,
+        className: highlightClass,
+        key: `highlight-${highlight.id}`
+      });
+
+      lastIndex = actualEndIndex;
+    });
+
+    // Добавляем оставшийся текст
+    if (lastIndex < text.length) {
+      parts.push({
+        type: 'text',
+        content: text.substring(lastIndex),
+        key: 'text-end'
+      });
+    }
+
+    return parts.map(part => {
+      if (part.type === 'text') {
+        return <span key={part.key}>{part.content}</span>;
+      } else {
+        return (
+          <span
+            key={part.key}
+            className={part.className}
+            onClick={() => !answered && handleHighlightClick(part.highlight.id)}
+            style={{ cursor: answered ? 'default' : 'pointer' }}
+          >
+            {part.content}
+          </span>
+        );
+      }
+    });
+  };
 
   return (
     <div className="highlight-task">
-      <h2>{task.question}</h2>
+      <h2>{task.title}</h2>
       <div className="highlight-text">
-        {highlights.map((part) => {
-          let partClass = 'text-part';
-          if (part.clicked) {
-            partClass += part.isCorrect ? ' part-correct' : ' part-incorrect';
-          }
-
-          return (
-            <span
-              key={part.id}
-              className={partClass}
-              onClick={() => handleHighlightClick(part.id)}
-            >
-              {part.text}
-            </span>
-          );
-        })}
+        {renderTextWithHighlights()}
       </div>
     </div>
   );
@@ -801,7 +912,36 @@ const renderReference = (reference) => {
       </table>
     );
   }
-  return <div className="reference-text">{reference.text}</div>;
+  
+  // Преобразуем текст справки в HTML с правильной разметкой
+  const formatReferenceText = (text) => {
+    if (!text) return '';
+    
+    // Разделяем текст на строки
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    // Находим заголовок и список
+    const titleIndex = lines.findIndex(line => line.includes('Что нужно делать'));
+    const title = titleIndex !== -1 ? lines[titleIndex] : '';
+    const listItems = titleIndex !== -1 ? lines.slice(titleIndex + 1) : lines;
+    
+    return (
+      <div className="reference-text">
+        {title && <div><strong>{title}</strong></div>}
+        {listItems.length > 0 && (
+          <ul>
+            {listItems.map((item, index) => {
+              // Убираем символ • если он есть в начале строки
+              const cleanItem = item.replace(/^•\s*/, '').trim();
+              return <li key={index}>{cleanItem}</li>;
+            })}
+          </ul>
+        )}
+      </div>
+    );
+  };
+  
+  return formatReferenceText(reference.text);
 };
 
 export default Task;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 
-const LivesBadge = ({ current = 0, max = 3 }) => {
+const LivesBadge = ({ current = 0, max = 30 }) => {
   return (
     <span className="lives-badge">
       <span>{current}/{max}</span>
