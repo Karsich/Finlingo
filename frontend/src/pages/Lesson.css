@@ -204,11 +204,24 @@
   color: #000000;
   padding: 15px 20px;
   border-bottom: 1px solid rgba(201, 114, 0, 0.2);
+  border-right: 1px solid rgba(201, 114, 0, 0.2);
   vertical-align: middle;
+}
+
+.lesson-content table td:last-child {
+  border-right: none;
 }
 
 .lesson-content table tr:last-child td {
   border-bottom: none;
+}
+
+.lesson-content table th {
+  border-right: 1px solid rgba(201, 114, 0, 0.2);
+}
+
+.lesson-content table th:last-child {
+  border-right: none;
 }
 
 /* Списки внутри таблиц */
