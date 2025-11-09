@@ -36,11 +36,7 @@ function AppContent() {
               />
               <Route 
                 path="/dashboard" 
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                } 
+                element={<Dashboard />} 
               />
               <Route 
                 path="/topic/:topic" 

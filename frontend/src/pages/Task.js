@@ -1275,9 +1275,11 @@ const DropdownTask = ({ task, taskState, updateTaskState, answered, isCorrect })
                   )}
                 </td>
                 <td className={answered ? 'explanation-visible' : 'explanation-hidden'}>
-                  <div style={{ minHeight: '60px' }}>
-                    {item.explanation}
-                  </div>
+                  {answered && (
+                    <div style={{ minHeight: '60px' }}>
+                      {item.explanation}
+                    </div>
+                  )}
                 </td>
               </tr>
             );

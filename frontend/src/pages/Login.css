@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc;
   padding: 20px;
   font-family: 'Inter', sans-serif;
 }
@@ -15,7 +14,7 @@
   width: 1000px;
   height: 600px;
   background: #F8A720;
-  border: 1px solid #FFEBCA;
+  border: 3px solid #642714;
   border-radius: 50px;
   display: flex;
   overflow: hidden;
@@ -77,14 +76,16 @@
 .login-form-wrapper {
   position: absolute;
   width: 340px;
-  top: 150px;
+  top: 80px;
   left: 590px;
   z-index: 10;
 }
 
-/* Для страницы регистрации - сдвигаем форму влево */
-.register-page .login-form-wrapper {
-  left: 70px;
+/* Для страницы регистрации - форма справа */
+.register-page .login-form-wrapper,
+.register-form-wrapper {
+  left: 590px;
+  right: auto;
 }
 
 .login-form {
@@ -248,16 +249,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   margin-top: 8px;
-  margin-bottom: 32px;
-}
-
-.divider-line {
-  width: 80px;
-  height: 0px;
-  border: 1px solid #000000;
-  opacity: 0.2;
+  margin-bottom: 16px;
 }
 
 .register-link {
@@ -270,8 +263,12 @@
   line-height: 100%;
   text-align: center;
   color: #000000;
+  background: none;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
   transition: opacity 0.2s;
+  padding: 0;
 }
 
 .register-link:hover {
@@ -325,7 +322,7 @@
   .login-form-wrapper {
     position: relative;
     left: auto;
-    top: auto;
+    top: 80px;
     margin: 40px auto;
   }
 }
