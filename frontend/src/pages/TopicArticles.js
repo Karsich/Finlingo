@@ -14,8 +14,8 @@ const TopicArticles = () => {
   const topicTitle = topic === 'rent' ? 'Съем квартиры' : 'Работа';
   const topicSlug = topic || 'job';
 
-  // Генерируем список уроков (11 уроков для примера)
-  const lessons = Array.from({ length: 11 }, (_, i) => i + 1);
+  // Генерируем список уроков (для rent - 5 уроков)
+  const lessons = topic === 'rent' ? Array.from({ length: 5 }, (_, i) => i + 1) : [];
 
   // Прогресс из БД
   const [lessonStatusByNumber, setLessonStatusByNumber] = useState({});
@@ -56,7 +56,7 @@ const TopicArticles = () => {
   // Проверяем, существует ли урок
   const lessonExists = (lessonNumber) => {
     if (topic === 'rent') {
-      const existingLessons = [1, 2, 3]; // Список существующих уроков
+      const existingLessons = [1, 2, 3, 4, 5]; // Список существующих уроков
       return existingLessons.includes(lessonNumber);
     }
     return false;
@@ -73,23 +73,29 @@ const TopicArticles = () => {
     if (topic === 'rent' && lessonNumber === 3) {
       return 'Документы – базовый минимум';
     }
+    if (topic === 'rent' && lessonNumber === 4) {
+      return 'За что уплачено';
+    }
+    if (topic === 'rent' && lessonNumber === 5) {
+      return 'Твои права';
+    }
     return `Урок ${lessonNumber}`;
   };
 
   // Позиции для шестиугольников в honeycomb pattern согласно дизайну
   const getLessonPosition = (lessonNumber) => {
     const positions = {
-      1: { left: '823px', top: '447px' },   // Polygon 143
-      2: { left: '707px', top: '649px' },   // Polygon 150
-      3: { left: '474px', top: '649px' },   // Polygon 142
-      4: { left: '357px', top: '852px' },   // Polygon 157
-      5: { left: '474px', top: '1054px' },  // Polygon 158
-      6: { left: '707px', top: '1054px' },  // Polygon 166
-      7: { left: '823px', top: '1257px' },  // Polygon 175
-      8: { left: '707px', top: '1459px' },  // Polygon 182
-      9: { left: '474px', top: '1459px' },  // Polygon 174
-      10: { left: '474px', top: '1864px' }, // Polygon 190
-      11: { left: '823px', top: '1662px' }, // Polygon 189
+      1: { left: '823px', top: '450px' },   // Polygon 143
+      2: { left: '707px', top: '652px' },   // Polygon 150
+      3: { left: '474px', top: '652px' },   // Polygon 142
+      4: { left: '357px', top: '855px' },   // Polygon 157
+      5: { left: '474px', top: '1057px' },  // Polygon 158
+      6: { left: '707px', top: '1057px' },  // Polygon 166
+      7: { left: '823px', top: '1260px' },  // Polygon 175
+      8: { left: '707px', top: '1462px' },  // Polygon 182
+      9: { left: '474px', top: '1462px' },  // Polygon 174
+      10: { left: '474px', top: '1867px' }, // Polygon 190
+      11: { left: '823px', top: '1665px' }, // Polygon 189
     };
     return positions[lessonNumber] || { left: '0px', top: '0px' };
   };
@@ -150,7 +156,9 @@ const TopicArticles = () => {
         {/* Заголовок */}
         <div className="topic-articles-header">
           <div className="topic-articles-header-content">
-            <div className="header-logo">ЛОГОТИП</div>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <div className="header-logo">ЛОГОТИП</div>
+            </Link>
             <nav className="header-nav">
               <Link to="/dashboard" className="header-nav-link">Задания</Link>
               <Link to="/shop" className="header-nav-link">Магазин</Link>
@@ -315,6 +323,18 @@ const TopicArticles = () => {
         <div className="topic-articles-footer">
           <div className="topic-articles-footer-content">
             <div className="footer-logo">ЛОГОТИП</div>
+            <nav className="header-nav">
+              <Link to="/dashboard" className="header-nav-link">Задания</Link>
+              <Link to="/shop" className="header-nav-link">Магазин</Link>
+            </nav>
+            <div className="header-social-links">
+              <Link to="/settings" className="header-social-icon">
+                <Settings size={32} color="#000000" />
+              </Link>
+              <Link to="/profile" className="header-social-icon">
+                <User size={32} color="#000000" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

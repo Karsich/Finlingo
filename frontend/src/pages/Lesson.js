@@ -13,6 +13,7 @@ const Lesson = () => {
   const [isCompleting, setIsCompleting] = useState(false);
   const [lessonStatus, setLessonStatus] = useState(null);
   const [isCheckingAccess, setIsCheckingAccess] = useState(true);
+  const [allTasksCompleted, setAllTasksCompleted] = useState(false);
 
   // Прокрутка вверх при изменении урока
   useEffect(() => {
@@ -144,6 +145,35 @@ const Lesson = () => {
     return false;
   };
 
+  // Проверяем, все ли задания урока выполнены
+  useEffect(() => {
+    const checkAllTasksCompleted = async () => {
+      if (!hasTasks()) {
+        // Если у урока нет заданий, считаем что все "выполнено"
+        setAllTasksCompleted(true);
+        return;
+      }
+
+      // Проверяем статус урока - если он completed, значит все задания выполнены
+      try {
+        const res = await progressAPI.getByTopic(topic);
+        const items = res.data?.items || [];
+        const currentLessonProgress = items.find(item => item.lesson_number === lessonNum);
+        
+        if (currentLessonProgress?.status === 'completed') {
+          setAllTasksCompleted(true);
+        } else {
+          setAllTasksCompleted(false);
+        }
+      } catch (error) {
+        console.error('Ошибка проверки прогресса заданий:', error);
+        setAllTasksCompleted(false);
+      }
+    };
+
+    checkAllTasksCompleted();
+  }, [topic, lessonNum]);
+
   // Обработка завершения урока
   const handleCompleteLesson = async (nextAction = 'next') => {
     setIsCompleting(true);
@@ -215,7 +245,9 @@ const Lesson = () => {
         {/* Шапка */}
         <div className="lesson-page-header">
           <div className="lesson-page-header-content">
-            <div className="header-logo">ЛОГОТИП</div>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <div className="header-logo">ЛОГОТИП</div>
+            </Link>
             <nav className="header-nav">
               <Link to="/dashboard" className="header-nav-link">Задания</Link>
               <Link to="/shop" className="header-nav-link">Магазин</Link>
@@ -263,7 +295,7 @@ const Lesson = () => {
                 <ArrowRight size={20} />
               </button>
             )}
-            {hasNextLesson() && (
+            {hasNextLesson() && (hasTasks() ? allTasksCompleted : true) && (
               <button
                 onClick={() => handleCompleteLesson('next')}
                 disabled={isCompleting}
@@ -289,6 +321,18 @@ const Lesson = () => {
         <div className="lesson-page-footer">
           <div className="lesson-page-footer-content">
             <div className="footer-logo">ЛОГОТИП</div>
+            <nav className="header-nav">
+              <Link to="/dashboard" className="header-nav-link">Задания</Link>
+              <Link to="/shop" className="header-nav-link">Магазин</Link>
+            </nav>
+            <div className="header-social-links">
+              <Link to="/settings" className="header-social-icon">
+                <Settings size={32} color="#000000" />
+              </Link>
+              <Link to="/profile" className="header-social-icon">
+                <User size={32} color="#000000" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

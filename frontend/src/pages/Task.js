@@ -4,7 +4,7 @@ import { Settings, User, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import './Task.css';
 import './LessonPage.css';
-import { livesAPI } from '../services/api';
+import { livesAPI, progressAPI } from '../services/api';
 
 // Данные заданий для третьего урока
 const getRentLesson3Tasks = (taskNum) => {
@@ -711,7 +711,16 @@ const Task = () => {
 
     if (correct) {
       toast.success('Правильный ответ!');
-      // TODO: Обновить прогресс заданий
+      
+      // Если это последнее задание урока и ответ правильный, отмечаем урок как completed
+      if (!hasNextTask()) {
+        try {
+          await progressAPI.markCompleted(topic, lessonNum);
+          console.log('Урок автоматически отмечен как completed после выполнения всех заданий');
+        } catch (error) {
+          console.error('Ошибка при отметке урока как completed:', error);
+        }
+      }
     } else if (taskData.type === 'highlight') {
       toast.error('Не все правильные элементы выбраны или выбраны неправильные.');
     }
@@ -828,7 +837,9 @@ const Task = () => {
         {/* Шапка */}
         <div className="lesson-page-header">
           <div className="lesson-page-header-content">
-            <div className="header-logo">ЛОГОТИП</div>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <div className="header-logo">ЛОГОТИП</div>
+            </Link>
             <nav className="header-nav">
               <Link to="/dashboard" className="header-nav-link">Задания</Link>
               <Link to="/shop" className="header-nav-link">Магазин</Link>
@@ -918,6 +929,18 @@ const Task = () => {
         <div className="lesson-page-footer">
           <div className="lesson-page-footer-content">
             <div className="footer-logo">ЛОГОТИП</div>
+            <nav className="header-nav">
+              <Link to="/dashboard" className="header-nav-link">Задания</Link>
+              <Link to="/shop" className="header-nav-link">Магазин</Link>
+            </nav>
+            <div className="header-social-links">
+              <Link to="/settings" className="header-social-icon">
+                <Settings size={32} color="#000000" />
+              </Link>
+              <Link to="/profile" className="header-social-icon">
+                <User size={32} color="#000000" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

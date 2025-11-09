@@ -16,27 +16,7 @@
   background: #FFFFFF;
 }
 
-/* Заголовок */
-.topic-articles-header {
-  position: relative;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  height: 122px;
-  background: #F8A720;
-}
-
-.topic-articles-header-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 55px 50px 50px;
-  gap: 120px;
-  height: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
+/* Стили для header теперь в common.css */
 
 /* Основной контент */
 .topic-articles-content {
@@ -204,92 +184,7 @@
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
 }
 
-/* Футер */
-.topic-articles-footer {
-  position: relative;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  height: 120px;
-  background: #F8A720;
-  border-radius: 0px 0px 50px 50px;
-  margin-top: auto;
-}
-
-.topic-articles-footer-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 55px 50px 50px;
-  gap: 120px;
-  height: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
-
-.footer-logo {
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 40px;
-  line-height: 110%;
-  letter-spacing: -0.03em;
-  color: #000000;
-}
-
-/* Общие стили для навигации (используются из Dashboard) */
-.header-logo {
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 40px;
-  line-height: 110%;
-  letter-spacing: -0.03em;
-  color: #000000;
-}
-
-.header-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-nav-link {
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 145%;
-  letter-spacing: -0.005em;
-  text-transform: capitalize;
-  color: #000000;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.header-nav-link:hover {
-  opacity: 0.7;
-}
-
-.header-social-links {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-social-icon {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.header-social-icon:hover {
-  opacity: 0.7;
-}
+/* Стили для footer и header теперь в common.css */
 
 /* ПК-версия только: без адаптивности */
 

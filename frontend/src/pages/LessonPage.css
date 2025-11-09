@@ -11,62 +11,7 @@
   min-height: 100vh;
 }
 
-/* Шапка */
-.lesson-page-header {
-  background: #C97200;
-  padding: 20px 0;
-  width: 100%;
-}
-
-.lesson-page-header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.lesson-page-header .header-logo {
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.lesson-page-header .header-nav {
-  display: flex;
-  gap: 30px;
-}
-
-.lesson-page-header .header-nav-link {
-  color: #000000;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18px;
-  transition: opacity 0.2s;
-}
-
-.lesson-page-header .header-nav-link:hover {
-  opacity: 0.7;
-}
-
-.lesson-page-header .header-social-links {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.lesson-page-header .header-social-icon {
-  color: #000000;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  transition: opacity 0.2s;
-}
-
-.lesson-page-header .header-social-icon:hover {
-  opacity: 0.7;
-}
+/* Стили для header и footer теперь в common.css */
 
 /* Кнопка назад */
 .lesson-page-back {
@@ -100,25 +45,7 @@
   background-color: #e0e0e0;
 }
 
-/* Футер */
-.lesson-page-footer {
-  background: #C97200;
-  padding: 20px 0;
-  margin-top: auto;
-  width: 100%;
-}
-
-.lesson-page-footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.lesson-page-footer .footer-logo {
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 24px;
-}
+/* Стили для footer теперь в common.css */
 
 /* Кнопки навигации в конце урока */
 .lesson-navigation {

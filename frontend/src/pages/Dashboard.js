@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { livesAPI, topicsAPI, progressAPI } from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { livesAPI, progressAPI } from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
 import { Settings, User, Eye, EyeOff } from 'lucide-react';
 import HoneycombDecoration from '../components/HoneycombDecoration';
 import toast from 'react-hot-toast';
@@ -40,14 +40,15 @@ const Dashboard = () => {
         progressAPI.getByTopic('rent'),
       ]);
 
-      const calc = (items) => {
-        const total = 11;
+      const calc = (items, topic) => {
+        // Для rent есть 5 уроков (1, 2, 3, 4, 5), для job пока нет уроков
+        const total = topic === 'rent' ? 5 : 0;
         const current = items?.data?.items?.filter(i => i.status === 'completed').length || 0;
-        const percent = (current / total) * 100;
+        const percent = total > 0 ? (current / total) * 100 : 0;
         return { current, total, percent };
       };
-      setJobProgress(calc(jobRes));
-      setRentProgress(calc(rentRes));
+      setJobProgress(calc(jobRes, 'job'));
+      setRentProgress(calc(rentRes, 'rent'));
     } catch (e) {
       console.warn('Не удалось загрузить прогресс тем');
     }
@@ -108,7 +109,9 @@ const Dashboard = () => {
         <div className="dashboard-header">
           {/* Футер (верхняя панель) */}
           <div className="header-footer">
-            <div className="header-logo">ЛОГОТИП</div>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <div className="header-logo">ЛОГОТИП</div>
+            </Link>
             <nav className="header-nav">
               <span className="header-nav-link" style={{ cursor: 'not-allowed', opacity: 0.5 }}>Задания</span>
               <span className="header-nav-link" style={{ cursor: 'not-allowed', opacity: 0.5 }}>Магазин</span>
@@ -165,7 +168,9 @@ const Dashboard = () => {
 
           {/* Футер в шапке */}
           <div className="header-footer">
-            <div className="header-logo">ЛОГОТИП</div>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <div className="header-logo">ЛОГОТИП</div>
+            </Link>
             <nav className="header-nav">
               <a href="/dashboard" className="header-nav-link">Задания</a>
               <a href="/shop" className="header-nav-link">Магазин</a>
@@ -204,18 +209,24 @@ const Dashboard = () => {
               tabIndex={0}
               style={{ cursor: 'pointer' }}
             >
-              <div className="course-card-icon"></div>
+              <div className="course-card-icon">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32.5507 32.5613L32.4938 19.0733M32.4938 19.0733L19.0338 19.1304M32.4938 19.0733L19.0907 32.6184M42.5461 8.91452C51.8776 18.1866 51.9414 33.2836 42.6885 42.6345C33.4356 51.9854 18.3699 52.0493 9.03843 42.7772C-0.293096 33.5051 -0.356842 18.4081 8.89604 9.0572C18.1489 -0.293709 33.2146 -0.357587 42.5461 8.91452Z" stroke="#C97200" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <h3 className="course-card-title">Как снять квартиру?</h3>
               <p className="course-card-description">
                 Узнай как найти подходящее жильё, как проверить договор аренды,
                 как вести переговоры с арендодателем и не попасться на мошенников
               </p>
-              <div className="progress-group">
-                <div className="progress-track">
-                  <div className="progress-fill" style={{ width: `${rentProgress.percent}%` }}></div>
-                  <div className="progress-text">{`${rentProgress.current}/${rentProgress.total}`}</div>
+              {user && (
+                <div className="progress-group">
+                  <div className="progress-track">
+                    <div className="progress-fill" style={{ width: `${rentProgress.percent}%` }}></div>
+                    <div className="progress-text">{`${rentProgress.current}/${rentProgress.total}`}</div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -240,18 +251,24 @@ const Dashboard = () => {
               tabIndex={0}
               style={{ cursor: 'pointer' }}
             >
-              <div className="course-card-icon"></div>
+              <div className="course-card-icon">
+                <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M32.5507 32.5613L32.4938 19.0733M32.4938 19.0733L19.0338 19.1304M32.4938 19.0733L19.0907 32.6184M42.5461 8.91452C51.8776 18.1866 51.9414 33.2836 42.6885 42.6345C33.4356 51.9854 18.3699 52.0493 9.03843 42.7772C-0.293096 33.5051 -0.356842 18.4081 8.89604 9.0572C18.1489 -0.293709 33.2146 -0.357587 42.5461 8.91452Z" stroke="#C97200" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
               <h3 className="course-card-title">Как найти работу?</h3>
               <p className="course-card-description">
                 На наших уроках ты узнаешь как правильно составить резюме,
                 как подготовиться к собеседованию и как найти работу своей мечты
               </p>
-              <div className="progress-group">
-                <div className="progress-track">
-                  <div className="progress-fill" style={{ width: `${jobProgress.percent}%` }}></div>
-                  <div className="progress-text">{`${jobProgress.current}/${jobProgress.total}`}</div>
+              {user && (
+                <div className="progress-group">
+                  <div className="progress-track">
+                    <div className="progress-fill" style={{ width: `${jobProgress.percent}%` }}></div>
+                    <div className="progress-text">{`${jobProgress.current}/${jobProgress.total}`}</div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -260,18 +277,6 @@ const Dashboard = () => {
         <div className="dashboard-footer">
           <div className="dashboard-footer-content">
             <div className="footer-logo">ЛОГОТИП</div>
-            <nav className="header-nav">
-              <span className="header-nav-link" style={{ cursor: 'not-allowed', opacity: 0.5 }}>Задания</span>
-              <span className="header-nav-link" style={{ cursor: 'not-allowed', opacity: 0.5 }}>Магазин</span>
-            </nav>
-            <div className="header-social-links">
-              <span className="header-social-icon" style={{ cursor: 'not-allowed', opacity: 0.5 }}>
-                <Settings size={32} color="#000000" />
-              </span>
-              <span className="header-social-icon" style={{ cursor: 'not-allowed', opacity: 0.5 }}>
-                <User size={32} color="#000000" />
-              </span>
-            </div>
           </div>
         </div>
         </div>
