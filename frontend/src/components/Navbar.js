@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/dashboard');
     setShowDropdown(false);
   };
 

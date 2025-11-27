@@ -196,8 +196,9 @@ const Dashboard = () => {
             <div className="lesson-illustration">
               <img src={mascotV10Image} alt="Пчёлка - квартира" className="lesson-image" />
             </div>
-            <div 
-              className="course-card right no-top-gap" 
+            <div className="course-card right no-top-gap" >
+              <div 
+              className="course-card-icon"
               onClick={() => navigate('/topic/rent')} 
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -208,8 +209,7 @@ const Dashboard = () => {
               role="button"
               tabIndex={0}
               style={{ cursor: 'pointer' }}
-            >
-              <div className="course-card-icon">
+              >
                 <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M32.5507 32.5613L32.4938 19.0733M32.4938 19.0733L19.0338 19.1304M32.4938 19.0733L19.0907 32.6184M42.5461 8.91452C51.8776 18.1866 51.9414 33.2836 42.6885 42.6345C33.4356 51.9854 18.3699 52.0493 9.03843 42.7772C-0.293096 33.5051 -0.356842 18.4081 8.89604 9.0572C18.1489 -0.293709 33.2146 -0.357587 42.5461 8.91452Z" stroke="#C97200" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -220,7 +220,20 @@ const Dashboard = () => {
                 как вести переговоры с арендодателем и не попасться на мошенников
               </p>
               {user && (
-                <div className="progress-group">
+                <div 
+                className="progress-group"
+                  
+              onClick={() => navigate('/topic/rent')} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate('/topic/rent');
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              style={{ cursor: 'pointer' }}
+                  >
                   <div className="progress-track">
                     <div className="progress-fill" style={{ width: `${rentProgress.percent}%` }}></div>
                     <div className="progress-text">{`${rentProgress.current}/${rentProgress.total}`}</div>
@@ -238,8 +251,10 @@ const Dashboard = () => {
             <div className="lesson-illustration">
               <img src={mascotV16Image} alt="Пчёлка - работа" className="lesson-image" />
             </div>
-            <div 
-              className="course-card" 
+            <div className="course-card">
+              <div 
+              className="course-card-icon"
+              
               onClick={() => navigate('/topic/job')} 
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -250,8 +265,7 @@ const Dashboard = () => {
               role="button"
               tabIndex={0}
               style={{ cursor: 'pointer' }}
-            >
-              <div className="course-card-icon">
+              >
                 <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M32.5507 32.5613L32.4938 19.0733M32.4938 19.0733L19.0338 19.1304M32.4938 19.0733L19.0907 32.6184M42.5461 8.91452C51.8776 18.1866 51.9414 33.2836 42.6885 42.6345C33.4356 51.9854 18.3699 52.0493 9.03843 42.7772C-0.293096 33.5051 -0.356842 18.4081 8.89604 9.0572C18.1489 -0.293709 33.2146 -0.357587 42.5461 8.91452Z" stroke="#C97200" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -262,7 +276,20 @@ const Dashboard = () => {
                 как подготовиться к собеседованию и как найти работу своей мечты
               </p>
               {user && (
-                <div className="progress-group">
+                <div 
+                className="progress-group"
+                
+              onClick={() => navigate('/topic/job')} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  navigate('/topic/job');
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              style={{ cursor: 'pointer' }}
+              >
                   <div className="progress-track">
                     <div className="progress-fill" style={{ width: `${jobProgress.percent}%` }}></div>
                     <div className="progress-text">{`${jobProgress.current}/${jobProgress.total}`}</div>
